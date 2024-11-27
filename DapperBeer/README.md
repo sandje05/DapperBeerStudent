@@ -1,0 +1,28 @@
+# Opdrachten Dapper (Software Engineering 3)
+
+De opgave staan in Assignment1.cs, Assignment2.cs en Assignment3.cs.
+Onder iedere opgave staat een test die je kunt gebruiken om te controleren of je oplossing werkt.
+
+In ``DBHelper.cs`` staat de connectonstring. Deze moet je aanpassen naar jouw eigen database.
+Een database met de naam ``DapperBeer`` kan je zelf aanmaken in MySQL m.b.v.:
+```sql
+CREATE DATABASE DapperBeer;
+```
+De test zullen de database tabellen aanmaken en vullen met de juiste data.
+Het is nuttig om eens een test te runnen en te kijken en je database te bekijken 
+(zie opdracht 1 in Assignments1.cs).
+
+Het code om een database en de tabellen aan te maken staat in de directory ``SQL\``.
+Daar staat ook een afbeelding van het databaseontwerp ``DapperBeerDatabaseDiagram.png``.
+
+Het is raadzaam om Rider te gebruiken. Deze kan beter overweg met SQL en C# dan Visual Studio.
+Als je dan fouten maakt in je SQL ziet Rider dit en kan je direct de fouten verbeteren.
+Ook kan je direct de queries uitvoeren in Rider en de resultaten bekijken.
+Je kan Rider gratis gebruiken met je een studenten account (https://www.jetbrains.com/community/education/#students).
+
+Op https://slides.com/jorislops/dapper kan je de slides vinden die ik heb gebruikt tijdens de les.
+Op https://www.learndapper.com/ kan je meer informatie vinden over Dapper.
+
+Veel succes met de opdrachten!
+
+Joris Lops
