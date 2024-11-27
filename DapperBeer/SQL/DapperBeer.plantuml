@@ -40,15 +40,23 @@ class Review {
    Score: decimal(4,2)
    ReviewId: int
 }
-class Sells {
-   CafeId: int
-   BeerId: int
-}
 
-Beer        -[#595959,plain]-^  Brewer     : "BrewerId"
-Brewmaster  -[#595959,plain]-^  Address    : "AddressId"
-Brewmaster  -[#595959,plain]-^  Brewer     : "BrewerId"
-Review      -[#595959,plain]-^  Beer       : "BeerId"
-Sells       -[#595959,plain]-^  Beer       : "BeerId"
-Sells       -[#595959,plain]-^  Cafe       : "CafeId"
+'class Sells {
+'   CafeId: int
+'   BeerId: int
+'}
+
+
+Beer "1..*" -- "1" Brewer : brews <
+Brewmaster "1" -- "1" Address : lives >
+Brewer "1" -- "0..1" Brewmaster : employees >
+Beer "1" -- "0..*" Review : has >
+Beer "*" -- "*" Cafe : sells >
+
+'Beer        -[#595959,plain]-^  Brewer     : "BrewerId"
+'Brewmaster  -[#595959,plain]-^  Address    : "AddressId"
+'Brewmaster  -[#595959,plain]-^  Brewer     : "BrewerId"
+'Review      -[#595959,plain]-^  Beer       : "BeerId"
+'Sells       -[#595959,plain]-^  Beer       : "BeerId"
+'Sells       -[#595959,plain]-^  Cafe       : "CafeId"
 @enduml

@@ -12,8 +12,10 @@ De test zullen de database tabellen aanmaken en vullen met de juiste data.
 Het is nuttig om eens een test te runnen en te kijken en je database te bekijken 
 (zie opdracht 1 in Assignments1.cs).
 
-Het code om een database en de tabellen aan te maken staat in de directory ``SQL\``.
+De code om een database en de tabellen aan te maken staat in de directory ``SQL\``.
 Daar staat ook een afbeelding van het databaseontwerp ``DapperBeerDatabaseDiagram.png``.
+En het klassendiagram ``DapperBeerClassDiagram.png``.
+En het klassendiagram ``DapperBeerClassDiagram.png``.
 
 Het is raadzaam om Rider te gebruiken. Deze kan beter overweg met SQL en C# dan Visual Studio.
 Als je dan fouten maakt in je SQL ziet Rider dit en kan je direct de fouten verbeteren.
