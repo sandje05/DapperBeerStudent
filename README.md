@@ -22,8 +22,18 @@ Als je dan fouten maakt in je SQL ziet Rider dit en kan je direct de fouten verb
 Ook kan je direct de queries uitvoeren in Rider en de resultaten bekijken.
 Je kan Rider gratis gebruiken met je een studenten account (https://www.jetbrains.com/community/education/#students).
 
+
+# Bronnen
+
 Op https://slides.com/jorislops/dapper kan je de slides vinden die ik heb gebruikt tijdens de les.
 Op https://www.learndapper.com/ kan je meer informatie vinden over Dapper.
+Opmerking: de pagina van LearnDapper is m.b.t. Relaties niet volledig en gebruikt niet de dictionary methode 
+die ik heb uitgelegd. Deze methoden wordt in de opdrachten gebruikt en ook door andere Dapper gebruikers aanbevolen.
+
+# Voorbeelden van Relaties
+
+Omdat de relatie tussen de tabellen in de database belangrijk is, heb ik een aantal voorbeelden gemaakt.
+Deze staan in de directory ``ExampleFromSheets``.
 
 Veel succes met de opdrachten!
 

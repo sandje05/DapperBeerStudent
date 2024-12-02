@@ -15,13 +15,19 @@ public class Assignments3
         DbHelper.CreateTablesAndInsertData();
     }
     
+    // Tip: Kijk in voorbeelden en sheets voor inspiratie.
+    // Deze staan in de directory ExampleFromSheets/Relationships.cs. 
+    // De sheets kan je vinden op: https://slides.com/jorislops/dapper/
+    // Kijk niet te veel naar de voorbeelden van relaties op https://www.learndapper.com/relationships
+    // Deze aanpak is niet altijd de manier de gewenst is!
+    
     // 1 op 1 relatie (one-to-one relationship)
     // Een brouwmeester heeft altijd 1 adres. Haal alle brouwmeesters op en zorg ervoor dat het address gevuld is.
     // Sorteer op naam.
     // Met andere woorden een brouwmeester heeft altijd een adres (Property Address van type Address), zie de klasse Brewmaster.
     // Je kan dit doen door een JOIN te gebruiken.
     // Je zult de map functie in Query<Brewmaster, Address, Brewmaster>(sql, map: ...) moeten gebruiken om de Address property van Brewmaster te vullen.
-    // https://www.learndapper.com/relationships (het eerste voorbeeld is ook een 1 op 1 relatie https://www.learndapper.com/relationships#dapper-spliton).
+    // Kijk in voorbeelden hoe je dit kan doen. Deze staan in de directory ExampleFromSheets/Relationships.cs.
     public static List<Brewmaster> GetAllBrouwmeestersIncludesAddress()
     {
         throw new NotImplementedException();
@@ -79,6 +85,7 @@ public class Assignments3
     // Sorteer op biernaam.
     // Zorg ervoor dat bieren van dezelfde brouwerij naar dezelfde instantie van Brouwer verwijzen.
     // Dit kan je doen door een Dictionary<int, Brouwer> te gebruiken.
+    // Kijk in voorbeelden hoe je dit kan doen. Deze staan in de directory ExampleFromSheets/Relationships.cs.
     public static List<Beer> GetAllBeersIncludeBrewery()
     {
         throw new NotImplementedException();
@@ -122,7 +129,7 @@ public class Assignments3
     // Dit is een veel voorkomend patroon in Dapper.
     // Vergeet de Distinct() methode te gebruiken om dubbel brouwerijen (Brewer) te voorkomen.
     //  Query<...>(...).Distinct().ToList().
-    // Zie https://www.learndapper.com/relationships#dapper-one-to-many-relationships  
+    
     public static List<Brewer> GetAllBrewersIncludeBeers()
     {
         throw new NotImplementedException();
