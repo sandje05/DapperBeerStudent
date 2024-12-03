@@ -251,8 +251,7 @@ public class Relationships
 
                     actor.Films.Add(film);
                     return actor;
-                },
-                splitOn: "FilmSplit")
+                }, splitOn: "FilmSplit")
             .Distinct() // remove duplicates, remember the SQL return each actor, film combination
             .ToList();
         return actors;
@@ -272,7 +271,6 @@ public class Relationships
     // we can't use LIMIT in the query because the limit is on the combination of actor and film
     // We can limit the number of actors to 3
     // We can use a subquery to limit the number of actors to 3
-    [Test]
     public List<Actor> ActorWithFilmsFirst3Actors()
     {
         string sql = """
@@ -323,6 +321,14 @@ public class Relationships
             .ToList();
         return actors;
     }
+    
+    [Test]
+    public async Task TestActorWithFilmsFirst3Actors()
+    {
+        List<Actor> actors = ActorWithFilmsFirst3Actors();
+        actors.Should().HaveCount(3);
+        await Verify(actors);
+    }
 
     // Multiple relationships
     // A customer rents movies (1 to N) and some customers haven't rented a movies (this is why a left-join is used).
@@ -356,6 +362,7 @@ public class Relationships
                 c.create_date AS CreateDate,
                 c.last_update AS LastUpdate,
                 '' AS 'CustomerSplit',
+                -- r.rental_id AS Id,
                 r.rental_id AS RentalId,
                 r.rental_date AS RentalDate,
                 r.inventory_id AS InventoryId,
@@ -364,11 +371,13 @@ public class Relationships
                 r.staff_id AS StaffId,
                 r.last_update AS LastUpdate,
                 '' AS 'RentalSplit',
+                -- i.inventory_id AS Id,
                 i.inventory_id AS InventoryId,
                 i.film_id AS FilmId,
                 i.store_id AS StoreId,
                 i.last_update AS LastUpdate,
                 '' AS 'InventorySplit',
+                -- f.film_id AS Id,
                 f.film_id AS FilmId,
                 f.title AS Title,
                 f.description AS Description,
@@ -390,20 +399,14 @@ public class Relationships
         
         IDbConnection connection = DbHelper.GetConnection();
         Dictionary<int, Customer> customerDictionary = new Dictionary<int, Customer>();
-        List<Customer> customers = connection.Query<Customer, Rental, Inventory, Film, Customer>(
+        List<Customer> customers = connection.Query<Customer, Rental?, Inventory, Film, Customer>(
             sql,
             map: (customer, rental, inventory, film) =>
             {
-                if (customerDictionary.ContainsKey(customer.CustomerId))
-                {
-                    customer = customerDictionary[customer.CustomerId];
-                }
-                else
-                {
-                    customerDictionary.Add(customer.CustomerId, customer);
-                }
-
-                if (rental.RentalId != 0) // check if rental exists, some customers don't have rentals!!
+                //add customer to dictionary if it doesn't exist, otherwise return existing customer
+                customer = customerDictionary.GetOrAdd(customer.CustomerId, customer); 
+                
+                if (rental is not null) // check if rental exists, some customers don't have rentals!!
                 {
                     rental.Inventory = inventory;
                     inventory.Film = film;
@@ -412,9 +415,8 @@ public class Relationships
                 }
 
                 return customer;
-            },
-            splitOn: "CustomerSplit, RentalSplit, InventorySplit") //the split on parameter is used to split the result set,
-                                                                   //not that multiple columns are used (seperated by a comma)
+            },  splitOn: "RentalId, RentalSplit, InventorySplit")  //the split on parameter is used to split the result set,
+                                                                   //note that multiple columns are used (seperated by a comma)
             .Distinct() // don't forget to remove duplicates (each customer, rental, inventory, film combination)
             .ToList();
 
@@ -428,57 +430,4 @@ public class Relationships
         customers.Should().HaveCount(599);
         await Verify(customers.Take(3));
     }
-    
-
-    // public List<Store> GetStoresIncludeCustomerThenIncludeAddressThenIncudeCityThenIncludeCountry()
-    // {
-    //     string sql =
-    //         """
-    //         SELECT  
-    //             s.store_id AS StoreId,
-    //             s.manager_staff_id AS ManagerStaffId,
-    //             s.address_id AS AddressId,
-    //             s.last_update AS LastUpdate,
-    //             '' AS 'StoreSplit',
-    //             customer.customer_id AS CustomerId,
-    //             customer.store_id AS StoreId,
-    //             customer.first_name AS FirstName,
-    //             customer.last_name AS LastName,
-    //             customer.email AS Email,
-    //             customer.address_id AS AddressId,
-    //             customer.active AS Active,
-    //             customer.create_date AS CreateDate,
-    //             customer.last_update AS LastUpdate,
-    //             '' As 'AddressSplit',
-    //             a.address_id, a.address, a.address2, a.district, a.city_id, a.postal_code, a.phone, a.last_update,
-    //             '' As 'CitySplit',
-    //             city.city_id, city.city, city.country_id, city.last_update,
-    //             '' As 'CountrySplit',
-    //             country.country_id, country.country, country.last_update
-    //         FROM store s 
-    //             JOIN customer ON s.store_id = customer.store_id
-    //                 JOIN address a ON customer.address_id = a.address_id
-    //                     JOIN city ON a.city_id = city.city_id
-    //                         JOIN country ON city.country_id = country.country_id
-    //         """;
-    //
-    //     Dictionary<int, Store> storeDictionary = new Dictionary<int, Store>();
-    //     Dictionary<int, Customer> customerDictionary = new Dictionary<int, Customer>();
-    //     using IDbConnection connection = DbHelper.GetConnection();
-    //     connection.Query<Store, Customer, Address, City, Country, Store>(sql,
-    //         map: (store, customer, address, city, country) =>
-    //         {
-    //             if (storeDictionary.ContainsKey(store.StoreId))
-    //             {
-    //                 store = storeDictionary[store.StoreId];
-    //             }
-    //             else
-    //             {
-    //                 storeDictionary.Add(store.StoreId, store);
-    //             }
-    //             
-    //
-    //             
-    //         }, splitOn: "StoreSplit, AddressSplit, CitySplit, CountrySplit"); 
-    // }
 }

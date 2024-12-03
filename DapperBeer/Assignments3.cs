@@ -62,11 +62,10 @@ public class Assignments3
     // Niet alle brouwers hebben een brouwmeester.
     // Let op: gebruik het correcte type JOIN (JOIN, LEFT JOIN, RIGHT JOIN).
     // Dapper snapt niet dat het om een 1 - 0..1 relatie gaat.
-    // Wat je kan doen is in de map functie is een controle toevoegen:
-    // if (brewmaster.BrewmasterId != 0)
-    // {
-    //     brewer.Brewmaster = brewmaster;    
-    // }
+    // De Query methode ziet er als volgt uit (let op het vraagteken optioneel):
+    // Query<Brewer, Brewmaster?, Brewer>(sql, map: ...)
+    // Wat je kan doen is in de map functie een controle toevoegen:
+    // if (brewmaster is not null) { brewer.Brewmaster = brewmaster; }
     public static List<Brewer> GetAllBrewersIncludeBrewmaster()
     {
         throw new NotImplementedException();
