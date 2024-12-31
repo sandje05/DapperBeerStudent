@@ -9,7 +9,7 @@ Een database met de naam ``DapperBeer`` kan je zelf aanmaken in MySQL m.b.v.:
 CREATE DATABASE DapperBeer;
 ```
 De test zullen de database tabellen aanmaken en vullen met de juiste data.
-Het is nuttig om eens een test te runnen en te kijken en je database te bekijken 
+Het is nuttig om eens een test te runnen en te kijken en je database te bekijken
 (zie opdracht 1 in Assignments1.cs).
 
 De code om een database en de tabellen aan te maken staat in de directory ``SQL\``.
@@ -27,7 +27,7 @@ Je kan Rider gratis gebruiken met je een studenten account (https://www.jetbrain
 
 Op https://slides.com/jorislops/dapper kan je de slides vinden die ik heb gebruikt tijdens de les.
 Op https://www.learndapper.com/ kan je meer informatie vinden over Dapper.
-Opmerking: de pagina van LearnDapper is m.b.t. Relaties niet volledig en gebruikt niet de dictionary methode 
+Opmerking: de pagina van LearnDapper is m.b.t. Relaties niet volledig en gebruikt niet de dictionary methode
 die ik heb uitgelegd. Deze methoden wordt in de opdrachten gebruikt en ook door andere Dapper gebruikers aanbevolen.
 
 # Voorbeelden van Relaties

@@ -7,14 +7,8 @@ using FluentAssertions;
 
 namespace DapperBeer;
 
-public class Assignments3
+public class Assignments3 : TestHelper
 {
-    [Before(Class)]
-    public static void CreateAndPopulateDatabase()
-    {
-        DbHelper.CreateTablesAndInsertData();
-    }
-    
     // Tip: Kijk in voorbeelden en sheets voor inspiratie.
     // Deze staan in de directory ExampleFromSheets/Relationships.cs. 
     // De sheets kan je vinden op: https://slides.com/jorislops/dapper/

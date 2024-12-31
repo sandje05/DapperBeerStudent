@@ -1,20 +1,20 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
 using DapperBeer.DTO;
 using DapperBeer.Model;
 using FluentAssertions;
+using TUnit.Core;
 
 namespace DapperBeer;
 
 using Dapper;
 
-public class Assignments1
+public class Assignments1 : TestHelper
 {
-    [Before(Class)]
-    public static void CreateAndPopulateDatabase()
-    {
-       DbHelper.CreateTablesAndInsertData();
-    }
-    
+    // 1 Question
     // Geef een overzicht van alle brouwers, gesorteerd op naam (alfabetisch).
     // Gebruik hiervoor de class Brewer. En de Query<Brewer>(sql) methode van Dapper.
     // Het is ook altijd een goed idee om het resultaat van de Query om te zetten naar een List<T>, 
@@ -41,8 +41,9 @@ public class Assignments1
         throw new NotImplementedException();
     }
     
+    // 1 Test
     [Test]
-    public async Task GetAllBeersTest()
+    public  async Task GetAllBeersTest()
     {
         List<Brewer> brewers = GetAllBeers();
         
@@ -52,12 +53,14 @@ public class Assignments1
     }
 
     
+    // 2 Question
     // Geef een overzicht van alle bieren gesorteerd op alcohol percentage (hoog naar laag).
     public static List<Beer> GetAllBeersOrderByAlcohol()
     {
         throw new NotImplementedException();
     }
     
+    // 2 Test
     [Test]
     public async Task GetAllBeersOrderByAlcoholTest()
     {
@@ -68,6 +71,7 @@ public class Assignments1
         await Verify(beers.Take(3));
     }
     
+    // 3 Question
     // Geef een overzicht van ale bieren voor een bepaald land gesorteerd op naam (alfabetisch).
     // Gebruik hiervoor de class Beer. En in je SQL-query JOIN met de tabel Brewer.
     // Gebruik de Query<Beer>(sql, new {Country = country}) methode van Dapper.
@@ -81,6 +85,7 @@ public class Assignments1
         throw new NotImplementedException();
     }
     
+    // 3 Test
     [Test]
     public async Task GetAllBeersSortedByNameForCountryTest()
     {
@@ -91,6 +96,7 @@ public class Assignments1
         await Verify(beers.Take(3));
     }
     
+    // 4 Question
     // Tel het aantal brouwerijen. Welke methode van Dapper gebruik je (niet Query<Brewer>)?
     // Een handige website om te kijken is:
     // https://www.learndapper.com/
@@ -100,6 +106,7 @@ public class Assignments1
         throw new NotImplementedException();
     }
     
+    // 4 Test
     [Test]
     public void CountBrewersTest()
     {
@@ -108,6 +115,7 @@ public class Assignments1
         breweryCount.Should().Be(677);
     }
     
+    // 5 Question
     // Geef een overzicht van het aantal brouwerijen per land gesorteerd op aantal brouwerijen.
     // Gebruik hiervoor een aparte class NumberOfBrewersByCountry
     // Voeg hiervoor properties toe aan de class NumberOfBrewersByCountry, namelijk Country en NumberOfBreweries.
@@ -120,6 +128,7 @@ public class Assignments1
         throw new NotImplementedException();
     }
 
+    // 5 Test
     [Test]
     public async Task NumberOfBrewersByCountryTest()
     {
@@ -130,6 +139,7 @@ public class Assignments1
         await Verify(numberOfBrewersByCountries.Take(3));
     }
     
+    // 6 Question
     // Geef het bier met het hoogste alcohol percentage terug. Welke methode gebruik je van Dapper (niet Query<Beer>)?
     // Je kan in MySQL de LIMIT 1 gebruiken om 1 record terug te krijgen.
     public static Beer GetBeerWithMostAlcohol()
@@ -137,6 +147,7 @@ public class Assignments1
         throw new NotImplementedException();
     }
     
+    // 6 Test
     [Test]
     public async Task GetBeerWithMostAlcoholTest()
     {
@@ -147,6 +158,7 @@ public class Assignments1
         await Verify(beer);
     }
     
+    // 7 Question
     // Gegeven de brewerId geef de brouwer terug. Let op: Wat moet er gebeuren als de brouwcode niet bestaat?
     // Met andere woorden, welke Dapper methode moet je gebruiken? 
     // Brewer? is een nullable type. Dit betekent dat de waarde null kan zijn,
@@ -156,6 +168,7 @@ public class Assignments1
         throw new NotImplementedException();
     }
     
+    // 7 Test
     [Test]
     public async Task GetBreweryByBrewerIdTest()
     {
@@ -170,12 +183,14 @@ public class Assignments1
         await Verify(brewer);
     }
     
+    // 8 Question
     // Gegeven de BrewerId, geef een overzicht van alle bieren van de brouwerij gesorteerd bij alcohol percentage.
     public static List<Beer> GetAllBeersByBreweryId(int brewerId)
     {
         throw new NotImplementedException();
     }
     
+    // 8 Test
     [Test]
     public async Task GetAllBeersByBreweryIdTest()
     {
@@ -186,6 +201,7 @@ public class Assignments1
         await Verify(beers);
     }
     
+    // 9 Question
     // Geef per cafe aan welke bieren ze schenken, sorteer op cafe naam en daarna bier naam.
     // Gebruik hiervoor de class CafeBeer (directory DTO). 
     // Voeg hiervoor properties toe aan de class CafeBeer, namelijk Beer en Cafe
@@ -194,6 +210,7 @@ public class Assignments1
         throw new NotImplementedException();
     }
     
+    // 9 Test
     [Test]
     public async Task GetCafeBeersTest()
     {
@@ -204,6 +221,7 @@ public class Assignments1
         await Verify(cafeBeers);
     }
     
+    // 10 Question
     // Hetzelfde resultaat als de vorige vraag alleen op een andere manier.
     // Geef nu een lijst van de namen van de bieren gescheiden door een komma terug in de SQL-query.
     // Je kan hiervoor de SQL-methode GROUP_CONCAT(beer.Name ORDER BY beer.Name) gebruiken in je SELECT-clause.
@@ -217,6 +235,7 @@ public class Assignments1
         throw new NotImplementedException();
     }
     
+    // 10 Test
     [Test]
     public async Task GetCafeBeersByListTest()
     {
@@ -227,25 +246,36 @@ public class Assignments1
         await Verify(cafeBeerList.Take(3));
     }
     
+    // 11 Question
     // Geef de gemiddelde waardering (score in de tabel Review) van een biertje terug gegeven de BeerId.
-    // De test staat onder de methode InsertReview(...).
     public static decimal GetBeerRating(int beerId)
     {
         throw new NotImplementedException();
     }
     
+    [Test]
+    public decimal GetBeerRatingTest()
+    {
+        using IDbConnection connection = DbHelper.GetConnection();
+        connection.Execute("INSERT INTO Review (BeerId, Score) VALUES (338, 4.5)");
+        decimal rating = GetBeerRating(338);
+        rating.Should().Be(4.5m);
+        return rating;
+    }
     
+    // 12 Question
     // Voeg een review toe voor een bier.
     public static void InsertReview(int BeerId, decimal score)
     {
         throw new NotImplementedException();
     }
 
+    // 12 Test
     [Test]
     [NotInParallel]
     public void InsertReview()
     {
-        DropAndCreateTableReviews();
+        DbHelper.DropAndCreateTableReviews();
         InsertReview(338, 4.5m);
         InsertReview(338, 5.0m);
         
@@ -253,32 +283,37 @@ public class Assignments1
         rating.Should().Be(4.75m);
     }
     
+    
+    // 12 Question
     // Voeg een review toe voor bier. Geef de reviewId terug.
     public static int InsertReviewReturnsReviewId(int beerId, decimal score)
     {
         throw new NotImplementedException();
     }
     
+    // 12 Test
     [Test]
     [NotInParallel]
     public void InsertReviewReturnsReviewIdTest()
     {
-        DropAndCreateTableReviews();
+        DbHelper.DropAndCreateTableReviews();
         int reviewId = InsertReviewReturnsReviewId(338, 4.5m);
         reviewId.Should().Be(1);
     }
 
+    // Question
     // Update een review voor een bepaalde reviewId.
     public static void UpdateReview(int reviewId, decimal score)
     {
         throw new NotImplementedException();
     }
     
+    // Test
     [Test]
     [NotInParallel]
     public void UpdateReviewTest()
     {
-        DropAndCreateTableReviews();
+        DbHelper.DropAndCreateTableReviews();
         InsertReview(338, 4.5m);
         
         int reviewId = InsertReviewReturnsReviewId(338, 4.5m);
@@ -290,42 +325,27 @@ public class Assignments1
         rating.Should().Be(4.75m);
     }
     
+    // Question 
     // Verwijder een review voor een bepaalde reviewId.
-    public static void VerwijderReview(int reviewId)
+    public static void RemoveReviewTest(int reviewId)
     {
         throw new NotImplementedException();
     }
     
+    // 14 Test
     [Test]
     [NotInParallel]
     public void RemoveReviewTest()
     {
-        DropAndCreateTableReviews();
+        DbHelper.DropAndCreateTableReviews();
         InsertReview(338, 4.5m);
         
         int reviewId = InsertReviewReturnsReviewId(338, 5.0m);
         reviewId.Should().Be(2);
         
-        VerwijderReview(reviewId);
+        RemoveReviewTest(reviewId);
         
         decimal rating = GetBeerRating(338);
         rating.Should().Be(4.5m);
-    }
-
-
-    public static void DropAndCreateTableReviews()
-    {
-        string dropCreateReviewTable = 
-            """
-            DROP TABLE IF EXISTS Review;
-            CREATE TABLE Review (
-                ReviewId INT PRIMARY KEY AUTO_INCREMENT,
-                BeerId INT REFERENCES Beer(BeerId),
-                Score DECIMAL(4, 2)
-            );
-            """;
-        
-        using IDbConnection connection = DbHelper.GetConnection();
-        connection.Execute(dropCreateReviewTable);
     }
 }

@@ -9,7 +9,7 @@ public static class DbHelper
 {
     public static IDbConnection GetConnection()
     {
-        return new MySqlConnection("server=localhost;database=DapperBeer;user=root;password=Test@1234!;AllowUserVariables=True");
+        return new MySqlConnection("server=localhost;database=DapperBeer;user=DapperBeer;password=Test@1234!;AllowUserVariables=True");
     }
 
     public static void CreateTablesAndInsertData()
@@ -67,5 +67,21 @@ public static class DbHelper
         public int SellsCount { get; set; }
         public int AddressCount { get; set; }
         public int BrewmasterCount { get; set; }
+    }
+
+    public static void DropAndCreateTableReviews()
+    {
+        string dropCreateReviewTable = 
+            """
+            DROP TABLE IF EXISTS Review;
+            CREATE TABLE Review (
+                ReviewId INT PRIMARY KEY AUTO_INCREMENT,
+                BeerId INT REFERENCES Beer(BeerId),
+                Score DECIMAL(4, 2)
+            );
+            """;
+        
+        using IDbConnection connection = DbHelper.GetConnection();
+        connection.Execute(dropCreateReviewTable);
     }
 }
