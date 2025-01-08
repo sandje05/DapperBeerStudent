@@ -17,7 +17,7 @@ public class Assignments1 : TestHelper
     // 1 Question
     // Geef een overzicht van alle brouwers, gesorteerd op naam (alfabetisch).
     // Gebruik hiervoor de class Brewer. En de Query<Brewer>(sql) methode van Dapper.
-    // Het is ook altijd een goed idee om het resultaat van de Query om te zetten naar een List<T>, 
+    // Het is ook altijd een goed idee om het resultaat van de Query om te zetten naar een `List<T>`, 
     // Dit kan met de methode ToList() die je aan het einde van de Query() kan toevoegen (connection.Query(sql).ToList()).
     // Onder deze methode staat een test. Zodat je kan controleren of je query en C# code correct werkt.
     // Tip: mocht je een foutmelding krijgen, kijk dan goed naar de foutmelding en de query die je hebt geschreven.

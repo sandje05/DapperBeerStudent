@@ -8,6 +8,15 @@ Een database met de naam ``DapperBeer`` kan je zelf aanmaken in MySQL m.b.v.:
 ```sql
 CREATE DATABASE DapperBeer;
 ```
+
+Een database user met de naam ``DapperBeerUser`` en wachtwoord ``Test@1234!`` kan je aanmaken in MySQL m.b.v.:
+```sql
+CREATE USER 'DapperBeer'@'localhost' IDENTIFIED BY 'Test@1234!'; 
+GRANT ALL ON DapperBeer.* TO 'DapperBeer'@'localhost'; 
+FLUSH PRIVILEGES;
+```
+Normaal gesproken is het een slecht idee om een user alle rechten te geven op een database (DapperBeer).
+
 De test zullen de database tabellen aanmaken en vullen met de juiste data.
 Het is nuttig om eens een test te runnen en te kijken en je database te bekijken
 (zie opdracht 1 in Assignments1.cs).
