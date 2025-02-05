@@ -36,7 +36,7 @@ public class Assignments1 : TestHelper
     // In de directory Model staan de classes die overeenkomen met de database tabellen.
     // In de directory DTO (Data Transfer Object) staan de classes die worden gebruikt als resultaat indien deze
     // niet overeenkomt met een database tabel (Model).
-    public static List<Brewer> GetAllBeers()
+    public static List<Brewer> GetAllBrewers()
     {
         throw new NotImplementedException();
     }
@@ -45,7 +45,7 @@ public class Assignments1 : TestHelper
     [Test]
     public  async Task GetAllBeersTest()
     {
-        List<Brewer> brewers = GetAllBeers();
+        List<Brewer> brewers = GetAllBrewers();
         
         brewers.Should().HaveCount(677);
 
