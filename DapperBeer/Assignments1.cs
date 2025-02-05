@@ -38,7 +38,8 @@ public class Assignments1 : TestHelper
     // niet overeenkomt met een database tabel (Model).
     public static List<Brewer> GetAllBrewers()
     {
-        throw new NotImplementedException();
+        var connection = DbHelper.GetConnection();
+        return connection.Query<Brewer>("SELECT * FROM Brewer").ToList();
     }
     
     // 1 Test
