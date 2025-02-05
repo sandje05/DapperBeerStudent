@@ -44,7 +44,7 @@ public class Assignments1 : TestHelper
     
     // 1 Test
     [Test]
-    public  async Task GetAllBeersTest()
+    public  async Task GetAllBrewersTest()
     {
         List<Brewer> brewers = GetAllBrewers();
         
