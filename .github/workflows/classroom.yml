@@ -1,0 +1,100 @@
+name: MySQL Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-mysql:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: test_user
+          MYSQL_PASSWORD: test_pass
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --host=127.0.0.1 --user=root --password=root"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Wait for MySQL to be ready
+        run: |
+          for i in {1..30}; do
+            if mysqladmin ping -h127.0.0.1 -uroot -proot --silent; then
+              echo "MySQL is ready!"
+              exit 0
+            fi
+            echo "Waiting for MySQL..."
+            sleep 2
+          done
+          echo "MySQL failed to start!"
+          exit 1
+
+      - name: Install MySQL client
+        run: sudo apt-get install -y mysql-client
+
+      - name: Connect to MySQL and run a query
+        run: |
+          mysql -h 127.0.0.1 -u test_user -ptest_pass test_db -e "SELECT NOW();"
+
+      - name: create beer database and user
+        run: |
+          mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE DapperBeer;CREATE USER IF NOT EXISTS 'DapperBeer'@'%' IDENTIFIED BY 'Test@1234!';GRANT ALL PRIVILEGES ON DapperBeer.* TO 'DapperBeer'@'%';FLUSH PRIVILEGES;"
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v4.3.0
+        with:
+          dotnet-version: 9.0.102
+
+#      - name: check .NET info
+#        run: |
+#          dotnet --info
+#
+#      - name: check ip
+#        run: |
+#          ifconfig
+
+      - name: Checkout Another Public Repository
+        uses: actions/checkout@v4
+
+      - name: A dotnet test Assignments1
+        id: a-dotnet-test1
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: A dotnet test test
+          command: dotnet run --treenode-filter "/*/*/Assignments1/*"
+          timeout: 10
+          max-score: 15
+
+      - name: A dotnet test Assignments2
+        id: a-dotnet-test2
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: A dotnet test test2
+          command: dotnet run --treenode-filter "/*/*/Assignments2/*"
+          timeout: 10
+          max-score: 6
+
+      - name: A dotnet test Assignments3
+        id: a-dotnet-test3
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: A dotnet test test2
+          command: dotnet run --treenode-filter "/*/*/Assignments3/*"
+          timeout: 10
+          max-score: 6
+
+      - name: Autograding Reporter
+        uses: education/autograding-grading-reporter@v1
+        env:
+          A-DOTNET-TEST1_RESULTS: "${{steps.a-dotnet-test1.outputs.result}}"
+          A-DOTNET-TEST2_RESULTS: "${{steps.a-dotnet-test2.outputs.result}}"
+          A-DOTNET-TEST3_RESULTS: "${{steps.a-dotnet-test3.outputs.result}}"
+        with:
+          runners: a-dotnet-test1, a-dotnet-test2, a-dotnet-test3
