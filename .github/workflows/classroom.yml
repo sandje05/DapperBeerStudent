@@ -29,6 +29,12 @@ jobs:
           
     if: github.actor != 'github-classroom[bot]'
     steps:
+      - name: debug pwd
+        run: pwd
+        
+      - name: debug ls
+        run: ls
+        
       - name: Wait for MySQL to be ready
         run: |
           for i in {1..30}; do
@@ -68,13 +74,22 @@ jobs:
 
       - name: Checkout Another Public Repository
         uses: actions/checkout@v4
+  
+      - name: Restore
+        run: dotnet restore
+      
+      - name: Build
+        run: dotnet build
+        
+      - name: List packages
+        run: list package --include-transitive
 
       - name: A dotnet test Assignments1
         id: a-dotnet-test1
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: A dotnet test test
-          command: dotnet run --treenode-filter "/*/*/Assignments1/*"
+          command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments1/*"
           timeout: 10
           max-score: 15
 
@@ -83,7 +98,7 @@ jobs:
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: A dotnet test test2
-          command: dotnet run --treenode-filter "/*/*/Assignments2/*"
+          command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments2/*"
           timeout: 10
           max-score: 6
 
@@ -92,7 +107,7 @@ jobs:
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: A dotnet test test2
-          command: dotnet run --treenode-filter "/*/*/Assignments3/*"
+          command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments3/*"
           timeout: 10
           max-score: 6
 

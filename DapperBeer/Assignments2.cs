@@ -9,12 +9,7 @@ namespace DapperBeer;
 
 public class Assignments2
 {
-    [Before(Class)]
-    public static void CreateAndPopulateDatabase()
-    {
-        DbHelper.CreateTablesAndInsertData();
-    }
-    
+    // 2.1 Question
     // !!!Doe dit nooit!!!!!
     // Wees voorzichtig en doe dit in de praktijk nooit!!!!!!
     // We gaan SQL-injectie gebruiken om te laten zien hoe het werkt.
@@ -38,17 +33,7 @@ public class Assignments2
         throw new NotImplementedException();
     }
     
-    [Test]
-    public void GetBeersByCountryWithSqlInjectionTest()
-    {
-        List<string> beers = GetBeersByCountryWithSqlInjection("BEL");
-        beers.Should().HaveCount(296);
-        
-        //sql injection test, we krijgen nu alle bieren terug 86 stuks ipv 7
-        List<string> allBeersSQlInjection = GetBeersByCountryWithSqlInjection("BEL' OR '1' = '1");
-        allBeersSQlInjection.Should().HaveCount(1617);
-    }
-    
+    // 2.2 Question
     // Maak een methode die alle bieren teruggeeft, gegeven het land, echter het land kan ook leeg gelaten worden.
     // Sorteer de bieren op naam.
     // Als het land leeg is, dan moeten alle bieren teruggegeven worden.
@@ -61,18 +46,7 @@ public class Assignments2
         throw new NotImplementedException();
     }
     
-    [Test]
-    public async Task GetAllBeersByCountryTest()
-    {
-        List<string> beers = GetAllBeersByCountry("BEL");
-        beers.Should().HaveCount(296);
-        
-        List<string> allBeers = GetAllBeersByCountry(null);
-        allBeers.Should().HaveCount(1617);
-
-        await Verify(allBeers.Take(3));
-    }
-    
+    // 2.3 Question
     // Nu doen we hetzelfde als in de vorige opdracht GetAllBeersByCountry, echter voegen we een extra parameter toe,
     // het minimal alcoholpercentage.
     // Ook het minAlcohol kan leeg gelaten worden (decimal? minAlcohol).
@@ -82,15 +56,7 @@ public class Assignments2
         throw new NotImplementedException(); 
     }
     
-    [Test]
-    public void GetAllBeersByCountryAndMinAlcoholTest()
-    {
-        GetAllBeersByCountryAndMinAlcohol("BEL", 5.5m).Should().HaveCount(213);
-        GetAllBeersByCountryAndMinAlcohol(minAlcohol: 5.5m).Should().HaveCount(626);
-        GetAllBeersByCountryAndMinAlcohol(country: "BEL").Should().HaveCount(296);
-        GetAllBeersByCountryAndMinAlcohol().Should().HaveCount(1617);
-    }
-    
+    // 2.4 Question
     // Helaas kan je in SQL bijv. geen parameter gebruiken voor de ORDER BY.
     // Dit kan je oplossen door de SQL te bouwen met een StringBuilder of een SqlBuilder.
     // De SqlBuilder is een handige tool om SQL-queries te bouwen.
@@ -137,24 +103,8 @@ public class Assignments2
         
         throw new NotImplementedException();
     }
-    
-    [Test]
-    public void GetAllBeersByCountryAndTypeTest()
-    {
-        GetAllBeersByCountryAndMinAlcoholOrderByWithSqlBuilder("BEL", 5.5m).Should().HaveCount(213);
-        GetAllBeersByCountryAndMinAlcoholOrderByWithSqlBuilder(minAlcohol: 5.5m).Should().HaveCount(626);
-        GetAllBeersByCountryAndMinAlcoholOrderByWithSqlBuilder(country: "BEL").Should().HaveCount(296);
-        GetAllBeersByCountryAndMinAlcoholOrderByWithSqlBuilder().Should().HaveCount(1617);
-        
-        IEnumerable<string> orderByName = GetAllBeersByCountryAndMinAlcoholOrderByWithSqlBuilder(minAlcohol: 10, country: "BEL", orderBy: "beer.Name").Take(2);
-        orderByName.Should().BeEquivalentTo(["ADA 10", "BIERE DU BOUCANIER"]);
-        IEnumerable<string> orderByAlcohol = GetAllBeersByCountryAndMinAlcoholOrderByWithSqlBuilder(orderBy: "Alcohol").Take(2);
-        orderByAlcohol.Should().BeEquivalentTo(["GULL", "BERLINER WEISSE" ]);
-        IEnumerable<string> orderByType = GetAllBeersByCountryAndMinAlcoholOrderByWithSqlBuilder(country: "BEL", orderBy: "Type").Take(2);
-        orderByType.Should().BeEquivalentTo(["MAREDSOUS 8", "FLOREFFE" ]);
-    }
 
-    
+    // 2.5 Question
     // Maak een view die de naam van het bier teruggeeft en de naam van de brouwerij
     // en de naam van de brouwmeester als de brouwerij deze heeft (LEFT JOIN).
     // Sorteer de resultaten op bier naam.
@@ -166,14 +116,7 @@ public class Assignments2
         throw new NotImplementedException();
     }
     
-    [Test]
-    public async Task GetAllBeerNamesWithBreweryAndBrewmasterTest()
-    {
-        List<BrewerBeerBrewmaster> result = GetAllBeerNamesWithBreweryAndBrewmaster();
-        result.Should().HaveCount(152);
-        await Verify(result.Take(3));
-    }
-    
+    // 2.6 Question
     // Soms is het onhandig om veel parameters mee te geven aan een methode.
     // Dit kan je oplossen door een klasse te maken die de parameters bevat.
     // De kan je rechtstreeks meegeven aan de Query<T>(sql, param: filter).
@@ -210,33 +153,4 @@ public class Assignments2
 
         throw new NotImplementedException();
     }
-    
-    [Test]
-    public async Task GetBeersByCountryAndTypeTest()
-    {
-        BeerFilter filter = new BeerFilter { Country = "BEL", Type = "LAGER, AMBE" };
-        List<Beer> beers1 = GetBeersByCountryAndType(filter);
-        beers1.Should().HaveCount(0);
-        
-        filter = new BeerFilter { Country = "BEL", PageSize = 5, PageIndex = 2};
-        List<Beer> beers2 = GetBeersByCountryAndType(filter);
-        beers2.Should().HaveCount(5);
-        
-        filter = new BeerFilter { OrderBy = "beer.Alcohol DESC" };
-        List<Beer> beers3 = GetBeersByCountryAndType(filter);
-        beers3.Should().HaveCount(10);
-        
-        filter = new BeerFilter { };
-        List<Beer> beers4 = GetBeersByCountryAndType(filter);
-        beers4.Should().HaveCount(10);
-        
-        List<Beer> testBeers = beers1.Take(3)
-            .Concat(beers2.Take(3))
-            .Concat(beers3.Take(3))
-            .Concat(beers4.Take(3))
-            .ToList();
-        
-        await Verify(testBeers);
-    }
-    
 }

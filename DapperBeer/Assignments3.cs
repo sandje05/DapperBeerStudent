@@ -3,12 +3,14 @@ using BenchmarkDotNet.Attributes;
 using Dapper;
 using DapperBeer.DTO;
 using DapperBeer.Model;
+using DapperBeer.Tests;
 using FluentAssertions;
 
 namespace DapperBeer;
 
-public class Assignments3 : TestHelper
+public class Assignments3
 {
+    // 3.1 Question
     // Tip: Kijk in voorbeelden en sheets voor inspiratie.
     // Deze staan in de directory ExampleFromSheets/Relationships.cs. 
     // De sheets kan je vinden op: https://slides.com/jorislops/dapper/
@@ -26,14 +28,8 @@ public class Assignments3 : TestHelper
     {
         throw new NotImplementedException();
     }
-    
-    [Test]
-    public async Task GetAllBrouwmeestersIncludesAddressTest()
-    {
-        List<Brewmaster> allBrewmastersIncludeAddress = GetAllBrouwmeestersIncludesAddress();
-        await Verify(allBrewmastersIncludeAddress.Take(3));
-    }
 
+    // 3.2 Question
     // 1 op 1 relatie (one-to-one relationship)
     // Haal alle brouwmeesters op en zorg ervoor dat de brouwer (Brewer) gevuld is.
     // Sorteer op naam.
@@ -41,14 +37,8 @@ public class Assignments3 : TestHelper
     {
         throw new NotImplementedException();
     }
-    
-    [Test]
-    public async Task GetAllBrewmastersWithBreweryTest()
-    {
-        List<Brewmaster> allBrewmastersWithBrewery = GetAllBrewmastersWithBrewery();
-        await Verify(allBrewmastersWithBrewery.Take(3));
-    }
 
+    // 3.3 Question
     // 1 op 1 (0..1) (one-to-one relationship) 
     // Geef alle brouwers op en zorg ervoor dat de brouwmeester gevuld is.
     // Sorteer op brouwernaam.
@@ -65,14 +55,7 @@ public class Assignments3 : TestHelper
         throw new NotImplementedException();
     }
     
-    [Test]
-    public async Task GetAllBrewersIncludeBrewmasterTest()
-    {
-        List<Brewer> allBrewersIncludeBrewmaster = GetAllBrewersIncludeBrewmaster();
-        allBrewersIncludeBrewmaster.Should().HaveCount(677);
-        await Verify(allBrewersIncludeBrewmaster.Take(3));
-    }
-    
+    // 3.4 Question
     // 1 op veel relatie (one-to-many relationship)
     // Geef een overzicht van alle bieren. Zorg ervoor dat de property Brewer gevuld is.
     // Sorteer op biernaam.
@@ -84,13 +67,7 @@ public class Assignments3 : TestHelper
         throw new NotImplementedException();
     }
     
-    [Test]
-    public async Task GetAllBeersIncludeBreweryTest()
-    {
-        List<Beer> allBeersIncludeBrewery = GetAllBeersIncludeBrewery();
-        await Verify(allBeersIncludeBrewery);
-    }
-    
+    // 3.5 Question
     // N+1 probleem (1-to-many relationship)
     // Geef een overzicht van alle brouwerijen en hun bieren. Sorteer op brouwerijnaam en daarna op biernaam.
     // Doe dit door eerst een Query<Brewer>(...) te doen die alle brouwerijen ophaalt. (Dit is 1)
@@ -103,14 +80,7 @@ public class Assignments3 : TestHelper
         throw new NotImplementedException();
     }
     
-    [Test]
-    public async Task GetAllBrewersIncludingBeersNPlus1Test()
-    {
-        List<Brewer> allBrewersIncludingBeersNPlus1 = GetAllBrewersIncludingBeersNPlus1();
-        allBrewersIncludingBeersNPlus1.Should().HaveCount(677);
-        await Verify(allBrewersIncludingBeersNPlus1.Take(3));
-    }
-    
+    // 3.6 Question
     // 1 op n relatie (one-to-many relationship)
     // Schrijf een query die een overzicht geeft van alle brouwerijen. Vul per brouwerij de property Beers (List<Beer>) met de bieren van die brouwerij.
     // Sorteer op brouwerijnaam en daarna op biernaam.
@@ -128,14 +98,7 @@ public class Assignments3 : TestHelper
         throw new NotImplementedException();
     }
     
-    [Test]
-    public async Task GetAllBrewersIncludeBeersTest()
-    {
-        List<Brewer> allBrewersIncludeBeers = GetAllBrewersIncludeBeers();
-        allBrewersIncludeBeers.Should().HaveCount(677);
-        await Verify(allBrewersIncludeBeers.Take(3));
-    }
-    
+    // 3.7 Question
     // Optioneel:
     // Dezelfde vraag als hiervoor, echter kan je nu ook de Beers property van Brewer vullen met de bieren?
     // Hiervoor moet je wat extra logica in map methode schrijven.
@@ -145,13 +108,7 @@ public class Assignments3 : TestHelper
         throw new NotImplementedException();
     }
     
-    [Test]
-    public async Task GetAllBeersIncludeBreweryAndIncludeBeersInBreweryTest()
-    {
-        List<Beer> allBeersIncludeBreweryAndIncludeBeersInBrewery = GetAllBeersIncludeBreweryAndIncludeBeersInBrewery();
-        await Verify(allBeersIncludeBreweryAndIncludeBeersInBrewery);
-    }
-    
+    // 3.8 Question
     // n op n relatie (many-to-many relationship)
     // Geef een overzicht van alle cafés en welke bieren ze schenken.
     // Let op een café kan meerdere bieren schenken. En een bier wordt vaak in meerdere cafe's geschonken. Dit is een n op n relatie.
@@ -170,6 +127,7 @@ public class Assignments3 : TestHelper
         throw new NotImplementedException();
     }
 
+    // 3.9 Question
     // We gaan nu nog een niveau dieper. Geef een overzicht van alle brouwerijen, met daarin de bieren die ze verkopen,
     // met daarin in welke cafés ze verkocht worden.
     // Sorteer op brouwerijnaam, biernaam en cafenaam. 
@@ -181,20 +139,7 @@ public class Assignments3 : TestHelper
         throw new NotImplementedException();
     }
     
-    [Test]
-    public async Task GetAllBrewersIncludeBeersThenIncludeCafesTest()
-    {
-        List<Brewer> allBrewersIncludeBeersThenIncludeCafes = GetAllBrewersIncludeBeersThenIncludeCafes();
-        allBrewersIncludeBeersThenIncludeCafes.Should().HaveCount(677);
-        List<Brewer> brewersWithBeersServedInMultipleCafes =
-            allBrewersIncludeBeersThenIncludeCafes
-                .Where(x => x.Beers.Any(b => b.Cafes.Count >= 2))
-                .Take(1)
-                .ToList();
-        await Verify(brewersWithBeersServedInMultipleCafes);
-    }
-    
-    
+    // 3.10 Question - Er is geen test voor deze vraag
     // Optioneel: Geef een overzicht van alle bieren en hun de bijbehorende brouwerij.
     // Sorteer op brouwerijnaam, biernaam.
     // Gebruik hiervoor een View BeerAndBrewer (maak deze zelf). Deze view bevat alle informatie die je nodig hebt gebruikt join om de tabellen Beer, Brewer.
@@ -203,13 +148,5 @@ public class Assignments3 : TestHelper
     public static List<Beer> GetBeerAndBrewersByView()
     {
         throw new NotImplementedException();
-    }
-    
-    [Test]
-    public async Task GetBeerAndBrewersByViewTest()
-    {
-        List<Beer> result = GetBeerAndBrewersByView();
-        result.Should().HaveCount(1617);
-        await Verify(result.Take(3));
     }
 }

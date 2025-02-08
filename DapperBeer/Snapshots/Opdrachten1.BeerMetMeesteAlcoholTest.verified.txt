@@ -1,8 +1,0 @@
-﻿{
-  BeerId: 555,
-  Name: XIAOYU,
-  Type: ALE, ENGLIS,
-  Style: BARLEY WINE,
-  Alcohol: 13.0,
-  BrewerId: 717
-}

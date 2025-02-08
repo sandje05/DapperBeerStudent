@@ -1,4 +1,4 @@
-namespace DapperBeer;
+namespace DapperBeer.Tests;
 
 public class TestHelper
 {
