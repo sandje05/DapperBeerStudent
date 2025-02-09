@@ -20,18 +20,28 @@ public class GithubClassroomYmlHelper
 
             int assignmentNumber = i+1;
             
-            int exercisePostfix = 0;
+            
+            // - name: Assignment 1-1
+            //     id: E-1-1
+            //     uses: classroom-resources/autograding-command-grader@v1
+            //     with:
+            //     test-name: Assignment 1-1 Test Name
+            //     command: dotnet run --project DapperBeer --treenode-filter "/*/*/Tests/Assignments1Tests/*"
+            //     timeout: 10
+            //     max-score: 1
+            
+            int exerciseNumber = 1;
             foreach (var method in testMethods)
             {
-                string id = $"a-dotnet-test-{method.Name}";
+                string id = $"E-{assignmentNumber}-{exerciseNumber}";
                 ids.Add(id);
                 string autograderTest = 
                 $"""
-                  - name: {assignmentNumber}.{exercisePostfix} {method.Name}
+                  - name: {assignmentNumber}.{exerciseNumber} {method.Name}
                     id: {id}
                     uses: classroom-resources/autograding-command-grader@v1
                     with:
-                      test-name: {assignmentNumber}.{exercisePostfix} {method.Name}
+                      test-name: {assignmentNumber}-{exerciseNumber}-{method.Name}
                       command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments{assignmentNumber}Tests/{method.Name}"
                       timeout: 10
                       max-score: 1
@@ -39,6 +49,7 @@ public class GithubClassroomYmlHelper
             
                 Console.WriteLine(autograderTest);
 
+                exerciseNumber++;
                 exerciseIndex++;
             }
         }

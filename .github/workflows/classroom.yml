@@ -29,11 +29,11 @@ jobs:
           
     if: github.actor != 'github-classroom[bot]'
     steps:
-      - name: debug pwd
-        run: pwd
-        
-      - name: debug ls
-        run: ls
+#      - name: debug pwd
+#        run: pwd
+#        
+#      - name: debug ls
+#        run: ls
         
       - name: Wait for MySQL to be ready
         run: |
@@ -84,279 +84,272 @@ jobs:
 #      - name: List packages
 #        run: list package --include-transitive
 
-      - name: 1.0 GetAllBrewersTest
-        id: a-dotnet-test-GetAllBrewersTest
+      - name: 1.1 GetAllBrewersTest
+        id: E-1-1
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 1.0 GetAllBrewersTest
+          test-name: 1-1-GetAllBrewersTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments1Tests/GetAllBrewersTest"
           timeout: 10
           max-score: 1
-      - name: 1.0 GetAllBeersOrderByAlcoholTest
-        id: a-dotnet-test-GetAllBeersOrderByAlcoholTest
+      - name: 1.2 GetAllBeersOrderByAlcoholTest
+        id: E-1-2
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 1.0 GetAllBeersOrderByAlcoholTest
+          test-name: 1-2-GetAllBeersOrderByAlcoholTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments1Tests/GetAllBeersOrderByAlcoholTest"
           timeout: 10
           max-score: 1
-      - name: 1.0 GetAllBeersSortedByNameForCountryTest
-        id: a-dotnet-test-GetAllBeersSortedByNameForCountryTest
+      - name: 1.3 GetAllBeersSortedByNameForCountryTest
+        id: E-1-3
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 1.0 GetAllBeersSortedByNameForCountryTest
+          test-name: 1-3-GetAllBeersSortedByNameForCountryTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments1Tests/GetAllBeersSortedByNameForCountryTest"
           timeout: 10
           max-score: 1
-      - name: 1.0 CountBrewersTest
-        id: a-dotnet-test-CountBrewersTest
+      - name: 1.4 CountBrewersTest
+        id: E-1-4
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 1.0 CountBrewersTest
+          test-name: 1-4-CountBrewersTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments1Tests/CountBrewersTest"
           timeout: 10
           max-score: 1
-      - name: 1.0 NumberOfBrewersByCountryTest
-        id: a-dotnet-test-NumberOfBrewersByCountryTest
+      - name: 1.5 NumberOfBrewersByCountryTest
+        id: E-1-5
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 1.0 NumberOfBrewersByCountryTest
+          test-name: 1-5-NumberOfBrewersByCountryTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments1Tests/NumberOfBrewersByCountryTest"
           timeout: 10
           max-score: 1
-      - name: 1.0 GetBeerWithMostAlcoholTest
-        id: a-dotnet-test-GetBeerWithMostAlcoholTest
+      - name: 1.6 GetBeerWithMostAlcoholTest
+        id: E-1-6
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 1.0 GetBeerWithMostAlcoholTest
+          test-name: 1-6-GetBeerWithMostAlcoholTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments1Tests/GetBeerWithMostAlcoholTest"
           timeout: 10
           max-score: 1
-      - name: 1.0 GetBreweryByBrewerIdTest
-        id: a-dotnet-test-GetBreweryByBrewerIdTest
+      - name: 1.7 GetBreweryByBrewerIdTest
+        id: E-1-7
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 1.0 GetBreweryByBrewerIdTest
+          test-name: 1-7-GetBreweryByBrewerIdTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments1Tests/GetBreweryByBrewerIdTest"
           timeout: 10
           max-score: 1
-      - name: 1.0 GetAllBeersByBreweryIdTest
-        id: a-dotnet-test-GetAllBeersByBreweryIdTest
+      - name: 1.8 GetAllBeersByBreweryIdTest
+        id: E-1-8
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 1.0 GetAllBeersByBreweryIdTest
+          test-name: 1-8-GetAllBeersByBreweryIdTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments1Tests/GetAllBeersByBreweryIdTest"
           timeout: 10
           max-score: 1
-      - name: 1.0 GetCafeBeersTest
-        id: a-dotnet-test-GetCafeBeersTest
+      - name: 1.9 GetCafeBeersTest
+        id: E-1-9
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 1.0 GetCafeBeersTest
+          test-name: 1-9-GetCafeBeersTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments1Tests/GetCafeBeersTest"
           timeout: 10
           max-score: 1
-      - name: 1.0 GetCafeBeersByListTest
-        id: a-dotnet-test-GetCafeBeersByListTest
+      - name: 1.10 GetCafeBeersByListTest
+        id: E-1-10
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 1.0 GetCafeBeersByListTest
+          test-name: 1-10-GetCafeBeersByListTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments1Tests/GetCafeBeersByListTest"
           timeout: 10
           max-score: 1
-      - name: 1.0 GetBeerRatingTest
-        id: a-dotnet-test-GetBeerRatingTest
+      - name: 1.11 GetBeerRatingTest
+        id: E-1-11
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 1.0 GetBeerRatingTest
+          test-name: 1-11-GetBeerRatingTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments1Tests/GetBeerRatingTest"
           timeout: 10
           max-score: 1
-      - name: 1.0 InsertReview
-        id: a-dotnet-test-InsertReview
+      - name: 1.12 InsertReview
+        id: E-1-12
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 1.0 InsertReview
+          test-name: 1-12-InsertReview
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments1Tests/InsertReview"
           timeout: 10
           max-score: 1
-      - name: 1.0 InsertReviewReturnsReviewIdTest
-        id: a-dotnet-test-InsertReviewReturnsReviewIdTest
+      - name: 1.13 UpdateReviewTest
+        id: E-1-13
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 1.0 InsertReviewReturnsReviewIdTest
-          command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments1Tests/InsertReviewReturnsReviewIdTest"
-          timeout: 10
-          max-score: 1
-      - name: 1.0 UpdateReviewTest
-        id: a-dotnet-test-UpdateReviewTest
-        uses: classroom-resources/autograding-command-grader@v1
-        with:
-          test-name: 1.0 UpdateReviewTest
+          test-name: 1-13-UpdateReviewTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments1Tests/UpdateReviewTest"
           timeout: 10
           max-score: 1
-      - name: 1.0 RemoveReviewTest
-        id: a-dotnet-test-RemoveReviewTest
+      - name: 1.14 RemoveReviewTest
+        id: E-1-14
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 1.0 RemoveReviewTest
+          test-name: 1-14-RemoveReviewTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments1Tests/RemoveReviewTest"
           timeout: 10
           max-score: 1
-      - name: 2.0 GetBeersByCountryWithSqlInjectionTest
-        id: a-dotnet-test-GetBeersByCountryWithSqlInjectionTest
+      - name: 2.1 GetBeersByCountryWithSqlInjectionTest
+        id: E-2-1
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 2.0 GetBeersByCountryWithSqlInjectionTest
+          test-name: 2-1-GetBeersByCountryWithSqlInjectionTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments2Tests/GetBeersByCountryWithSqlInjectionTest"
           timeout: 10
           max-score: 1
-      - name: 2.0 GetAllBeersByCountryTest
-        id: a-dotnet-test-GetAllBeersByCountryTest
+      - name: 2.2 GetAllBeersByCountryTest
+        id: E-2-2
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 2.0 GetAllBeersByCountryTest
+          test-name: 2-2-GetAllBeersByCountryTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments2Tests/GetAllBeersByCountryTest"
           timeout: 10
           max-score: 1
-      - name: 2.0 GetAllBeersByCountryAndMinAlcoholTest
-        id: a-dotnet-test-GetAllBeersByCountryAndMinAlcoholTest
+      - name: 2.3 GetAllBeersByCountryAndMinAlcoholTest
+        id: E-2-3
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 2.0 GetAllBeersByCountryAndMinAlcoholTest
+          test-name: 2-3-GetAllBeersByCountryAndMinAlcoholTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments2Tests/GetAllBeersByCountryAndMinAlcoholTest"
           timeout: 10
           max-score: 1
-      - name: 2.0 GetAllBeersByCountryAndTypeTest
-        id: a-dotnet-test-GetAllBeersByCountryAndTypeTest
+      - name: 2.4 GetAllBeersByCountryAndTypeTest
+        id: E-2-4
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 2.0 GetAllBeersByCountryAndTypeTest
+          test-name: 2-4-GetAllBeersByCountryAndTypeTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments2Tests/GetAllBeersByCountryAndTypeTest"
           timeout: 10
           max-score: 1
-      - name: 2.0 GetAllBeerNamesWithBreweryAndBrewmasterTest
-        id: a-dotnet-test-GetAllBeerNamesWithBreweryAndBrewmasterTest
+      - name: 2.5 GetAllBeerNamesWithBreweryAndBrewmasterTest
+        id: E-2-5
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 2.0 GetAllBeerNamesWithBreweryAndBrewmasterTest
+          test-name: 2-5-GetAllBeerNamesWithBreweryAndBrewmasterTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments2Tests/GetAllBeerNamesWithBreweryAndBrewmasterTest"
           timeout: 10
           max-score: 1
-      - name: 2.0 GetBeersByCountryAndTypeTest
-        id: a-dotnet-test-GetBeersByCountryAndTypeTest
+      - name: 2.6 GetBeersByCountryAndTypeTest
+        id: E-2-6
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 2.0 GetBeersByCountryAndTypeTest
+          test-name: 2-6-GetBeersByCountryAndTypeTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments2Tests/GetBeersByCountryAndTypeTest"
           timeout: 10
           max-score: 1
-      - name: 3.0 GetAllBrouwmeestersIncludesAddressTest
-        id: a-dotnet-test-GetAllBrouwmeestersIncludesAddressTest
+      - name: 3.1 GetAllBrouwmeestersIncludesAddressTest
+        id: E-3-1
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 3.0 GetAllBrouwmeestersIncludesAddressTest
+          test-name: 3-1-GetAllBrouwmeestersIncludesAddressTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments3Tests/GetAllBrouwmeestersIncludesAddressTest"
           timeout: 10
           max-score: 1
-      - name: 3.0 GetAllBrewmastersWithBreweryTest
-        id: a-dotnet-test-GetAllBrewmastersWithBreweryTest
+      - name: 3.2 GetAllBrewmastersWithBreweryTest
+        id: E-3-2
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 3.0 GetAllBrewmastersWithBreweryTest
+          test-name: 3-2-GetAllBrewmastersWithBreweryTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments3Tests/GetAllBrewmastersWithBreweryTest"
           timeout: 10
           max-score: 1
-      - name: 3.0 GetAllBrewersIncludeBrewmasterTest
-        id: a-dotnet-test-GetAllBrewersIncludeBrewmasterTest
+      - name: 3.3 GetAllBrewersIncludeBrewmasterTest
+        id: E-3-3
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 3.0 GetAllBrewersIncludeBrewmasterTest
+          test-name: 3-3-GetAllBrewersIncludeBrewmasterTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments3Tests/GetAllBrewersIncludeBrewmasterTest"
           timeout: 10
           max-score: 1
-      - name: 3.0 GetAllBeersIncludeBreweryTest
-        id: a-dotnet-test-GetAllBeersIncludeBreweryTest
+      - name: 3.4 GetAllBeersIncludeBreweryTest
+        id: E-3-4
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 3.0 GetAllBeersIncludeBreweryTest
+          test-name: 3-4-GetAllBeersIncludeBreweryTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments3Tests/GetAllBeersIncludeBreweryTest"
           timeout: 10
           max-score: 1
-      - name: 3.0 GetAllBrewersIncludingBeersNPlus1Test
-        id: a-dotnet-test-GetAllBrewersIncludingBeersNPlus1Test
+      - name: 3.5 GetAllBrewersIncludingBeersNPlus1Test
+        id: E-3-5
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 3.0 GetAllBrewersIncludingBeersNPlus1Test
+          test-name: 3-5-GetAllBrewersIncludingBeersNPlus1Test
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments3Tests/GetAllBrewersIncludingBeersNPlus1Test"
           timeout: 10
           max-score: 1
-      - name: 3.0 GetAllBrewersIncludeBeersTest
-        id: a-dotnet-test-GetAllBrewersIncludeBeersTest
+      - name: 3.6 GetAllBrewersIncludeBeersTest
+        id: E-3-6
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 3.0 GetAllBrewersIncludeBeersTest
+          test-name: 3-6-GetAllBrewersIncludeBeersTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments3Tests/GetAllBrewersIncludeBeersTest"
           timeout: 10
           max-score: 1
-      - name: 3.0 GetAllBeersIncludeBreweryAndIncludeBeersInBreweryTest
-        id: a-dotnet-test-GetAllBeersIncludeBreweryAndIncludeBeersInBreweryTest
+      - name: 3.7 GetAllBeersIncludeBreweryAndIncludeBeersInBreweryTest
+        id: E-3-7
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 3.0 GetAllBeersIncludeBreweryAndIncludeBeersInBreweryTest
+          test-name: 3-7-GetAllBeersIncludeBreweryAndIncludeBeersInBreweryTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments3Tests/GetAllBeersIncludeBreweryAndIncludeBeersInBreweryTest"
           timeout: 10
           max-score: 1
-      - name: 3.0 GetAllBrewersIncludeBeersThenIncludeCafesTest
-        id: a-dotnet-test-GetAllBrewersIncludeBeersThenIncludeCafesTest
+      - name: 3.8 GetAllBrewersIncludeBeersThenIncludeCafesTest
+        id: E-3-8
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 3.0 GetAllBrewersIncludeBeersThenIncludeCafesTest
+          test-name: 3-8-GetAllBrewersIncludeBeersThenIncludeCafesTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments3Tests/GetAllBrewersIncludeBeersThenIncludeCafesTest"
           timeout: 10
           max-score: 1
-      - name: 3.0 GetBeerAndBrewersByViewTest
-        id: a-dotnet-test-GetBeerAndBrewersByViewTest
+      - name: 3.9 GetBeerAndBrewersByViewTest
+        id: E-3-9
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 3.0 GetBeerAndBrewersByViewTest
+          test-name: 3-9-GetBeerAndBrewersByViewTest
           command: dotnet run --project DapperBeer --treenode-filter "/*/*/Assignments3Tests/GetBeerAndBrewersByViewTest"
           timeout: 10
           max-score: 1
           
+
+
       - name: Autograding Reporter Dapper Beer
         uses: education/autograding-grading-reporter@v1
         env:
-          a-dotnet-test-GetAllBrewersTest_RESULTS: "${{steps.a-dotnet-test-GetAllBrewersTest.outputs.result}}"
-          a-dotnet-test-GetAllBeersOrderByAlcoholTest_RESULTS: "${{steps.a-dotnet-test-GetAllBeersOrderByAlcoholTest.outputs.result}}"
-          a-dotnet-test-GetAllBeersSortedByNameForCountryTest_RESULTS: "${{steps.a-dotnet-test-GetAllBeersSortedByNameForCountryTest.outputs.result}}"
-          a-dotnet-test-CountBrewersTest_RESULTS: "${{steps.a-dotnet-test-CountBrewersTest.outputs.result}}"
-          a-dotnet-test-NumberOfBrewersByCountryTest_RESULTS: "${{steps.a-dotnet-test-NumberOfBrewersByCountryTest.outputs.result}}"
-          a-dotnet-test-GetBeerWithMostAlcoholTest_RESULTS: "${{steps.a-dotnet-test-GetBeerWithMostAlcoholTest.outputs.result}}"
-          a-dotnet-test-GetBreweryByBrewerIdTest_RESULTS: "${{steps.a-dotnet-test-GetBreweryByBrewerIdTest.outputs.result}}"
-          a-dotnet-test-GetAllBeersByBreweryIdTest_RESULTS: "${{steps.a-dotnet-test-GetAllBeersByBreweryIdTest.outputs.result}}"
-          a-dotnet-test-GetCafeBeersTest_RESULTS: "${{steps.a-dotnet-test-GetCafeBeersTest.outputs.result}}"
-          a-dotnet-test-GetCafeBeersByListTest_RESULTS: "${{steps.a-dotnet-test-GetCafeBeersByListTest.outputs.result}}"
-          a-dotnet-test-GetBeerRatingTest_RESULTS: "${{steps.a-dotnet-test-GetBeerRatingTest.outputs.result}}"
-          a-dotnet-test-InsertReview_RESULTS: "${{steps.a-dotnet-test-InsertReview.outputs.result}}"
-          a-dotnet-test-InsertReviewReturnsReviewIdTest_RESULTS: "${{steps.a-dotnet-test-InsertReviewReturnsReviewIdTest.outputs.result}}"
-          a-dotnet-test-UpdateReviewTest_RESULTS: "${{steps.a-dotnet-test-UpdateReviewTest.outputs.result}}"
-          a-dotnet-test-RemoveReviewTest_RESULTS: "${{steps.a-dotnet-test-RemoveReviewTest.outputs.result}}"
-          a-dotnet-test-GetBeersByCountryWithSqlInjectionTest_RESULTS: "${{steps.a-dotnet-test-GetBeersByCountryWithSqlInjectionTest.outputs.result}}"
-          a-dotnet-test-GetAllBeersByCountryTest_RESULTS: "${{steps.a-dotnet-test-GetAllBeersByCountryTest.outputs.result}}"
-          a-dotnet-test-GetAllBeersByCountryAndMinAlcoholTest_RESULTS: "${{steps.a-dotnet-test-GetAllBeersByCountryAndMinAlcoholTest.outputs.result}}"
-          a-dotnet-test-GetAllBeersByCountryAndTypeTest_RESULTS: "${{steps.a-dotnet-test-GetAllBeersByCountryAndTypeTest.outputs.result}}"
-          a-dotnet-test-GetAllBeerNamesWithBreweryAndBrewmasterTest_RESULTS: "${{steps.a-dotnet-test-GetAllBeerNamesWithBreweryAndBrewmasterTest.outputs.result}}"
-          a-dotnet-test-GetBeersByCountryAndTypeTest_RESULTS: "${{steps.a-dotnet-test-GetBeersByCountryAndTypeTest.outputs.result}}"
-          a-dotnet-test-GetAllBrouwmeestersIncludesAddressTest_RESULTS: "${{steps.a-dotnet-test-GetAllBrouwmeestersIncludesAddressTest.outputs.result}}"
-          a-dotnet-test-GetAllBrewmastersWithBreweryTest_RESULTS: "${{steps.a-dotnet-test-GetAllBrewmastersWithBreweryTest.outputs.result}}"
-          a-dotnet-test-GetAllBrewersIncludeBrewmasterTest_RESULTS: "${{steps.a-dotnet-test-GetAllBrewersIncludeBrewmasterTest.outputs.result}}"
-          a-dotnet-test-GetAllBeersIncludeBreweryTest_RESULTS: "${{steps.a-dotnet-test-GetAllBeersIncludeBreweryTest.outputs.result}}"
-          a-dotnet-test-GetAllBrewersIncludingBeersNPlus1Test_RESULTS: "${{steps.a-dotnet-test-GetAllBrewersIncludingBeersNPlus1Test.outputs.result}}"
-          a-dotnet-test-GetAllBrewersIncludeBeersTest_RESULTS: "${{steps.a-dotnet-test-GetAllBrewersIncludeBeersTest.outputs.result}}"
-          a-dotnet-test-GetAllBeersIncludeBreweryAndIncludeBeersInBreweryTest_RESULTS: "${{steps.a-dotnet-test-GetAllBeersIncludeBreweryAndIncludeBeersInBreweryTest.outputs.result}}"
-          a-dotnet-test-GetAllBrewersIncludeBeersThenIncludeCafesTest_RESULTS: "${{steps.a-dotnet-test-GetAllBrewersIncludeBeersThenIncludeCafesTest.outputs.result}}"
-          a-dotnet-test-GetBeerAndBrewersByViewTest_RESULTS: "${{steps.a-dotnet-test-GetBeerAndBrewersByViewTest.outputs.result}}"
+          E-1-1_RESULTS: "${{steps.E-1-1.outputs.result}}"
+          E-1-2_RESULTS: "${{steps.E-1-2.outputs.result}}"
+          E-1-3_RESULTS: "${{steps.E-1-3.outputs.result}}"
+          E-1-4_RESULTS: "${{steps.E-1-4.outputs.result}}"
+          E-1-5_RESULTS: "${{steps.E-1-5.outputs.result}}"
+          E-1-6_RESULTS: "${{steps.E-1-6.outputs.result}}"
+          E-1-7_RESULTS: "${{steps.E-1-7.outputs.result}}"
+          E-1-8_RESULTS: "${{steps.E-1-8.outputs.result}}"
+          E-1-9_RESULTS: "${{steps.E-1-9.outputs.result}}"
+          E-1-10_RESULTS: "${{steps.E-1-10.outputs.result}}"
+          E-1-11_RESULTS: "${{steps.E-1-11.outputs.result}}"
+          E-1-12_RESULTS: "${{steps.E-1-12.outputs.result}}"
+          E-1-13_RESULTS: "${{steps.E-1-13.outputs.result}}"
+          E-1-14_RESULTS: "${{steps.E-1-14.outputs.result}}"
+          E-2-1_RESULTS: "${{steps.E-2-1.outputs.result}}"
+          E-2-2_RESULTS: "${{steps.E-2-2.outputs.result}}"
+          E-2-3_RESULTS: "${{steps.E-2-3.outputs.result}}"
+          E-2-4_RESULTS: "${{steps.E-2-4.outputs.result}}"
+          E-2-5_RESULTS: "${{steps.E-2-5.outputs.result}}"
+          E-2-6_RESULTS: "${{steps.E-2-6.outputs.result}}"
+          E-3-1_RESULTS: "${{steps.E-3-1.outputs.result}}"
+          E-3-2_RESULTS: "${{steps.E-3-2.outputs.result}}"
+          E-3-3_RESULTS: "${{steps.E-3-3.outputs.result}}"
+          E-3-4_RESULTS: "${{steps.E-3-4.outputs.result}}"
+          E-3-5_RESULTS: "${{steps.E-3-5.outputs.result}}"
+          E-3-6_RESULTS: "${{steps.E-3-6.outputs.result}}"
+          E-3-7_RESULTS: "${{steps.E-3-7.outputs.result}}"
+          E-3-8_RESULTS: "${{steps.E-3-8.outputs.result}}"
+          E-3-9_RESULTS: "${{steps.E-3-9.outputs.result}}"
         with:
-          runners: a-dotnet-test-GetAllBrewersTest, a-dotnet-test-GetAllBeersOrderByAlcoholTest, a-dotnet-test-GetAllBeersSortedByNameForCountryTest, a-dotnet-test-CountBrewersTest, a-dotnet-test-NumberOfBrewersByCountryTest, a-dotnet-test-GetBeerWithMostAlcoholTest, a-dotnet-test-GetBreweryByBrewerIdTest, a-dotnet-test-GetAllBeersByBreweryIdTest, a-dotnet-test-GetCafeBeersTest, a-dotnet-test-GetCafeBeersByListTest, a-dotnet-test-GetBeerRatingTest, a-dotnet-test-InsertReview, a-dotnet-test-InsertReviewReturnsReviewIdTest, a-dotnet-test-UpdateReviewTest, a-dotnet-test-RemoveReviewTest, a-dotnet-test-GetBeersByCountryWithSqlInjectionTest, a-dotnet-test-GetAllBeersByCountryTest, a-dotnet-test-GetAllBeersByCountryAndMinAlcoholTest, a-dotnet-test-GetAllBeersByCountryAndTypeTest, a-dotnet-test-GetAllBeerNamesWithBreweryAndBrewmasterTest, a-dotnet-test-GetBeersByCountryAndTypeTest, a-dotnet-test-GetAllBrouwmeestersIncludesAddressTest, a-dotnet-test-GetAllBrewmastersWithBreweryTest, a-dotnet-test-GetAllBrewersIncludeBrewmasterTest, a-dotnet-test-GetAllBeersIncludeBreweryTest, a-dotnet-test-GetAllBrewersIncludingBeersNPlus1Test, a-dotnet-test-GetAllBrewersIncludeBeersTest, a-dotnet-test-GetAllBeersIncludeBreweryAndIncludeBeersInBreweryTest, a-dotnet-test-GetAllBrewersIncludeBeersThenIncludeCafesTest, a-dotnet-test-GetBeerAndBrewersByViewTest
+          runners: E-1-1, E-1-2, E-1-3, E-1-4, E-1-5, E-1-6, E-1-7, E-1-8, E-1-9, E-1-10, E-1-11, E-1-12, E-1-13, E-1-14, E-2-1, E-2-2, E-2-3, E-2-4, E-2-5, E-2-6, E-3-1, E-3-2, E-3-3, E-3-4, E-3-5, E-3-6, E-3-7, E-3-8, E-3-9

@@ -8,7 +8,7 @@ namespace DapperBeer.Tests;
 
 public class Assignments1Tests : TestHelper
 {
-    // 1 Test
+    // 1.1 Test
     [Test]
     public  async Task GetAllBrewersTest()
     {
@@ -19,7 +19,7 @@ public class Assignments1Tests : TestHelper
         await Verify(brewers.Take(3));
     }
     
-    // 2 Test
+    // 1.2 Test
     [Test]
     public async Task GetAllBeersOrderByAlcoholTest()
     {
@@ -30,7 +30,7 @@ public class Assignments1Tests : TestHelper
         await Verify(beers.Take(3));
     }
     
-    // 3 Test
+    // 1.3 Test
     [Test]
     public async Task GetAllBeersSortedByNameForCountryTest()
     {
@@ -41,7 +41,7 @@ public class Assignments1Tests : TestHelper
         await Verify(beers.Take(3));
     }
     
-    // 4 Test
+    // 1.4 Test
     [Test]
     public void CountBrewersTest()
     {
@@ -50,7 +50,7 @@ public class Assignments1Tests : TestHelper
         breweryCount.Should().Be(677);
     }
     
-    // 5 Test
+    // 1.5 Test
     [Test]
     public async Task NumberOfBrewersByCountryTest()
     {
@@ -61,7 +61,7 @@ public class Assignments1Tests : TestHelper
         await Verify(numberOfBrewersByCountries.Take(3));
     }
     
-    // 6 Test
+    // 1.6 Test
     [Test]
     public async Task GetBeerWithMostAlcoholTest()
     {
@@ -72,7 +72,7 @@ public class Assignments1Tests : TestHelper
         await Verify(beer);
     }
     
-    // 7 Test
+    // 1.7 Test
     [Test]
     public async Task GetBreweryByBrewerIdTest()
     {
@@ -87,7 +87,7 @@ public class Assignments1Tests : TestHelper
         await Verify(brewer);
     }
     
-    // 8 Test
+    // 1.8 Test
     [Test]
     public async Task GetAllBeersByBreweryIdTest()
     {
@@ -98,7 +98,7 @@ public class Assignments1Tests : TestHelper
         await Verify(beers);
     }
     
-    // 9 Test
+    // 1.9 Test
     [Test]
     public async Task GetCafeBeersTest()
     {
@@ -109,7 +109,7 @@ public class Assignments1Tests : TestHelper
         await Verify(cafeBeers);
     }
     
-    // 10 Test
+    // 1.10 Test
     [Test]
     public async Task GetCafeBeersByListTest()
     {
@@ -120,6 +120,7 @@ public class Assignments1Tests : TestHelper
         await Verify(cafeBeerList.Take(3));
     }
     
+    // 1.11 Test
     [Test]
     public decimal GetBeerRatingTest()
     {
@@ -146,16 +147,6 @@ public class Assignments1Tests : TestHelper
     // 1.13 Test
     [Test]
     [NotInParallel]
-    public void InsertReviewReturnsReviewIdTest()
-    {
-        DbHelper.DropAndCreateTableReviews();
-        int reviewId = Assignments1.InsertReviewReturnsReviewId(338, 4.5m);
-        reviewId.Should().Be(1);
-    }
-    
-    // Test
-    [Test]
-    [NotInParallel]
     public void UpdateReviewTest()
     {
         DbHelper.DropAndCreateTableReviews();
@@ -170,7 +161,7 @@ public class Assignments1Tests : TestHelper
         rating.Should().Be(4.75m);
     }
     
-    // 14 Test
+    // 1.14 Test
     [Test]
     [NotInParallel]
     public void RemoveReviewTest()
