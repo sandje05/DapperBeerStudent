@@ -14,7 +14,7 @@ public static class DbHelper
 
     public static void CreateTablesAndInsertData()
     {
-        using var connection = DbHelper.GetConnection();
+        using var connection = GetConnection();
 
         string[] tables = ["Brewer", "Beer", "Cafe", "Sells", "Address", "Brewmaster"];
 
