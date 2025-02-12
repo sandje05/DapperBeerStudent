@@ -44,9 +44,6 @@ public class Assignments1 : TestHelper
         // Het is beter om geen * te gebruiken, maar om kolom namen te gebruiken die overeen komen
         // met de properties van de class Brewer (mijn mening)
         return connection.Query<Brewer>("SELECT * FROM Brewer ORDER BY Name")
-                  
-            
-            
             .ToList();
     }
     
