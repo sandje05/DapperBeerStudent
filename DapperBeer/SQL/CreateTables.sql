@@ -1,4 +1,4 @@
--- create database DapperBeeren; 
+create database if not exists DapperBeer;
 use DapperBeer;
 
 SET FOREIGN_KEY_CHECKS = 0;

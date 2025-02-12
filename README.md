@@ -4,12 +4,15 @@ De opgave staan in Assignment1.cs, Assignment2.cs en Assignment3.cs.
 Onder iedere opgave staat een test die je kunt gebruiken om te controleren of je oplossing werkt.
 
 In ``DBHelper.cs`` staat de connectonstring. Deze moet je aanpassen naar jouw eigen database.
+**Onderstaande hoef je niet te lezen.** Als je de test uitvoert wordt automatisch de database aangemaakt!
+
+
 Een database met de naam ``DapperBeer`` kan je zelf aanmaken in MySQL m.b.v.:
 ```sql
 CREATE DATABASE DapperBeer;
 ```
 
-Een database user met de naam ``DapperBeerUser`` en wachtwoord ``Test@1234!`` kan je aanmaken in MySQL m.b.v.:
+Een database user met de naam ``DapperBeer`` en wachtwoord ``Test@1234!`` kan je aanmaken in MySQL m.b.v.:
 ```sql
 CREATE USER 'DapperBeer'@'localhost' IDENTIFIED BY 'Test@1234!'; 
 GRANT ALL ON DapperBeer.* TO 'DapperBeer'@'localhost'; 
