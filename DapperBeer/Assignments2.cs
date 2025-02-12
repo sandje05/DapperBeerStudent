@@ -2,7 +2,6 @@ using System.Data;
 using Dapper;
 using DapperBeer.DTO;
 using DapperBeer.Model;
-using FluentAssertions;
 using SqlKata;
 
 namespace DapperBeer;

@@ -6,6 +6,8 @@ using FluentAssertions;
 
 namespace DapperBeer.Tests;
 
+[TestFixture]
+[NonParallelizable]
 public class Assignments1Tests : TestHelper
 {
     // 1.1 Test
@@ -133,7 +135,6 @@ public class Assignments1Tests : TestHelper
     
     // 1.12 Test
     [Test]
-    [NotInParallel]
     public void InsertReview()
     {
         DbHelper.DropAndCreateTableReviews();
@@ -146,7 +147,6 @@ public class Assignments1Tests : TestHelper
     
     // 1.13 Test
     [Test]
-    [NotInParallel]
     public void UpdateReviewTest()
     {
         DbHelper.DropAndCreateTableReviews();
@@ -163,7 +163,6 @@ public class Assignments1Tests : TestHelper
     
     // 1.14 Test
     [Test]
-    [NotInParallel]
     public void RemoveReviewTest()
     {
         DbHelper.DropAndCreateTableReviews();

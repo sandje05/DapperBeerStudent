@@ -4,6 +4,7 @@ using FluentAssertions;
 
 namespace DapperBeer.Tests;
 
+[TestFixture]
 public class Assignments2Tests : TestHelper
 {
     // 2.1 Test
