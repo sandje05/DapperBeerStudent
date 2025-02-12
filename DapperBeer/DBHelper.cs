@@ -16,7 +16,7 @@ public static class DbHelper
     {
         using var connection = GetConnection();
 
-        string[] tables = ["Brewer", "Beer", "Cafe", "Sells", "Address", "Brewmaster"];
+        string[] tables = ["Brewer", "Beer", "Cafe", "Sells", "Address", "Brewmaster", "Review"];
 
         bool allExists = tables.All(table => connection.QuerySingleOrDefault<bool>(
             $"""

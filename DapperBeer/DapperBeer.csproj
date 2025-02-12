@@ -44,6 +44,9 @@
       <None Update="SQL\InsertBrewmaster.sql">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+      <None Update="SQL\InsertReview.sql">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
     
     <ItemGroup>

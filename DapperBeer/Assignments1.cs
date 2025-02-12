@@ -49,7 +49,14 @@ public class Assignments1 : TestHelper
     // Geef een overzicht van alle bieren gesorteerd op alcohol percentage (hoog naar laag).
     public static List<Beer> GetAllBeersOrderByAlcohol()
     {
-        throw new NotImplementedException();
+        string sql = 
+            @"  SELECT BeerId, Name, Type, Style, Alcohol, BrewerId 
+                FROM Beer 
+                ORDER BY Alcohol DESC";
+
+        using var connection = DbHelper.GetConnection();
+        var beers = connection.Query<Beer>(sql).ToList();
+        return beers;
     }
     
     // 1.3 Question
@@ -77,7 +84,7 @@ public class Assignments1 : TestHelper
     }
     
     // 1.5 Question
-    // Geef een overzicht van het aantal brouwerijen per land gesorteerd op aantal brouwerijen.
+    // Geef een overzicht van het aantal brouwerijen per land gesorteerd op aantal brouwerijen (van hoog naar laag).
     // Gebruik hiervoor een aparte class NumberOfBrewersByCountry
     // Voeg hiervoor properties toe aan de class NumberOfBrewersByCountry, namelijk Country en NumberOfBreweries.
     // Gebruik de volgende SELECT-clause zodat de kolomnamen in de resultaten overeenkomen met de properties van de class NumberOfBrewersByCountry.:
@@ -115,60 +122,37 @@ public class Assignments1 : TestHelper
     }
     
     // 1.9 Question
-    // Geef per cafe aan welke bieren ze schenken, sorteer op cafe naam en daarna bier naam.
+    // Geef per cafe (Cafe) aan welke bier (Beer) ze schenken, sorteer op cafe naam en daarna op bier naam.
     // Gebruik hiervoor de class CafeBeer (directory DTO). 
-    // Voeg hiervoor properties toe aan de class CafeBeer, namelijk Beer en Cafe
     public static List<CafeBeer> GetCafeBeers()
     {
         throw new NotImplementedException();
     }
     
-    // 1.10 Question
-    // Hetzelfde resultaat als de vorige vraag alleen op een andere manier.
-    // Geef nu een lijst van de namen van de bieren gescheiden door een komma terug in de SQL-query.
-    // Je kan hiervoor de SQL-methode GROUP_CONCAT(beer.Name ORDER BY beer.Name) gebruiken in je SELECT-clause.
-    // Sorteer op naam van het cafe en daarna op de namen van de bieren (deze sortering zit in de GROUP_CONCAT(beer.Name ORDER BY beer.Name)).
-    // Gebruik hiervoor de class CafeBeerList, de properties zijn al toegevoegd.
-    // Het probleem is dat een cafe meerdere bieren kan schenken. Hoe los je dit op?
-    // Je zult wat extra code moeten schrijven in C#.
-    // De truc is dat je klasse CafeBeer gebruikt voor je Query<CafeBeer> en dan 'converteren/kopiëren van de waardes' naar CafeBeerList. 
-    public static List<CafeBeerList> GetCafeBeersByList()
-    {
-        throw new NotImplementedException();
-    }
+    // De vorige 1.10 Question heb ik verwijderd, deze was nogal lastig
     
-    // 1.11 Question
+    // 1.10 Question
     // Geef de gemiddelde waardering (score in de tabel Review) van een biertje terug gegeven de BeerId.
     public static decimal GetBeerRating(int beerId)
     {
         throw new NotImplementedException();
     }
     
-    // 1.12 Question
-    // Voeg een review toe voor een bier.
-    public static void InsertReview(int BeerId, decimal score)
+    // 1.11 Question
+    // Voeg een review toe voor een bier, met andere woorden gebruik een INSERT.
+    // De test werkt alleen als de vorige vraag ook correct is gemaakt.
+    public static void InsertReview(int beerId, decimal score)
     {
         throw new NotImplementedException();
     }
     
-    // 1.13 Question
+    // 1.12 Question
     // Voeg een review toe voor bier. Geef de reviewId terug.
+    // Deze test werkt alleen decimal GetBeerRating(int beerId) methode correct is (twee vragen hiervoor).
     public static int InsertReviewReturnsReviewId(int beerId, decimal score)
     {
         throw new NotImplementedException();
     }
     
-    // 1.14 Question
-    // Update een review voor een bepaalde reviewId.
-    public static void UpdateReviews(int reviewId, decimal score)
-    {
-        throw new NotImplementedException();
-    }
-    
-    // 1.15 Question 
-    // Verwijder een review voor een bepaalde reviewId.
-    public static void RemoveReviews(int reviewId)
-    {
-        throw new NotImplementedException();
-    }
+    // twee methoden verwijderd
 }

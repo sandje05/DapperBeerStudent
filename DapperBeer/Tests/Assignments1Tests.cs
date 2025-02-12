@@ -113,67 +113,32 @@ public class Assignments1Tests : TestHelper
     
     // 1.10 Test
     [Test]
-    public async Task GetCafeBeersByListTest()
+    public void GetBeerRatingTest()
     {
-        List<CafeBeerList> cafeBeerList = Assignments1.GetCafeBeersByList();
-
-        cafeBeerList.Should().HaveCount(145);
-
-        await Verify(cafeBeerList.Take(3));
+        using var connection = DbHelper.GetConnection();
+        decimal rating = Assignments1.GetBeerRating(338);
+        rating.Should().Be(4.5m);
     }
     
     // 1.11 Test
     [Test]
-    public decimal GetBeerRatingTest()
+    public void InsertReviewTest()
     {
-        using IDbConnection connection = DbHelper.GetConnection();
-        connection.Execute("INSERT INTO Review (BeerId, Score) VALUES (338, 4.5)");
-        decimal rating = Assignments1.GetBeerRating(338);
-        rating.Should().Be(4.5m);
-        return rating;
-    }
-    
-    // 1.12 Test
-    [Test]
-    public void InsertReview()
-    {
-        DbHelper.DropAndCreateTableReviews();
-        Assignments1.InsertReview(338, 4.5m);
+        // in SQL/InsertReview.sql wordt ook al een record toegevoegd.  
         Assignments1.InsertReview(338, 5.0m);
         
         decimal rating = Assignments1.GetBeerRating(338);
         rating.Should().Be(4.75m);
     }
     
-    // 1.13 Test
+    // 1.12 Test
     [Test]
-    public void UpdateReviewTest()
+    public void InsertReviewReturnsReviewIdTest()
     {
-        DbHelper.DropAndCreateTableReviews();
-        Assignments1.InsertReview(338, 4.5m);
-        
-        int reviewId = Assignments1.InsertReviewReturnsReviewId(338, 4.5m);
-        reviewId.Should().Be(2);
-        
-        Assignments1.UpdateReviews(reviewId, 5.0m);
-        
-        decimal rating = Assignments1.GetBeerRating(338);
-        rating.Should().Be(4.75m);
-    }
-    
-    // 1.14 Test
-    [Test]
-    public void RemoveReviewTest()
-    {
-        DbHelper.DropAndCreateTableReviews();
-        Assignments1.InsertReview(338, 4.5m);
-        
         int reviewId = Assignments1.InsertReviewReturnsReviewId(338, 5.0m);
         reviewId.Should().Be(2);
         
-        Assignments1.RemoveReviews(reviewId);
-        
         decimal rating = Assignments1.GetBeerRating(338);
-        rating.Should().Be(4.5m);
+        rating.Should().Be(4.75m);
     }
 }
