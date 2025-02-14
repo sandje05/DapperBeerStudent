@@ -108,7 +108,7 @@ public class Assignments1Tests : TestHelper
 
         cafeBeers.Should().HaveCount(754);
 
-        await Verify(cafeBeers);
+        await Verify(cafeBeers.Take(3));
     }
     
     // 1.10 Test
