@@ -34,7 +34,6 @@ Als je dan fouten maakt in je SQL ziet Rider dit en kan je direct de fouten verb
 Ook kan je direct de queries uitvoeren in Rider en de resultaten bekijken.
 Je kan Rider gratis gebruiken met je een studenten account (https://www.jetbrains.com/community/education/#students).
 
-
 # Bronnen
 
 Op https://slides.com/jorislops/dapper kan je de slides vinden die ik heb gebruikt tijdens de les.
