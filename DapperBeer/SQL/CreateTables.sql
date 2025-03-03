@@ -19,8 +19,6 @@ create table Brewer
     Country      text null
 );
 
-
-
 create table Address (
     AddressId INT PRIMARY KEY AUTO_INCREMENT,
     Street TEXT,
@@ -38,8 +36,8 @@ create table Brewmaster (
 
 create table Beer
 (
-    BeerId  int    not null
-        primary key,
+    BeerId  int    auto_increment not null
+        primary key ,
     Name      text   null,
     Type      text   null,
     Style     text   null,
@@ -53,7 +51,7 @@ create table Beer
 create table Cafe
 (
     CafeId int  not null
-        primary key,
+        primary key auto_increment,
     Name        text null,
     Address     text null,
     City        text null

@@ -41,7 +41,8 @@ public class Assignments1 : TestHelper
         var connection = DbHelper.GetConnection();
         // Het is beter om geen * te gebruiken, maar om kolom namen te gebruiken die overeen komen
         // met de properties van de class Brewer (mijn mening)
-        return connection.Query<Brewer>("SELECT * FROM Brewer ORDER BY Name")
+        return connection
+            .Query<Brewer>("SELECT BrewerId, Name, Country FROM Brewer ORDER BY Name")
             .ToList();
     }
     
@@ -60,7 +61,7 @@ public class Assignments1 : TestHelper
     }
     
     // 1.3 Question
-    // Geef een overzicht van ale bieren voor een bepaald land gesorteerd op naam (alfabetisch).
+    // Geef een overzicht van ale bieren voor een bepaald land gesorteerd op bier-naam (alfabetisch).
     // Gebruik hiervoor de class Beer. En in je SQL-query JOIN met de tabel Brewer.
     // Gebruik de Query<Beer>(sql, new {Country = country}) methode van Dapper.
     // In je SQL-query kan je de WHERE-clause gebruiken om te filteren op land.
