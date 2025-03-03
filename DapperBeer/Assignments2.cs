@@ -49,10 +49,10 @@ public class Assignments2
     // Nu doen we hetzelfde als in de vorige opdracht GetAllBeersByCountry, echter voegen we een extra parameter toe,
     // het minimal alcoholpercentage.
     // Ook het minAlcohol kan leeg gelaten worden (decimal? minAlcohol).
-    // Gebruikt >= (groter of gelijk aan) voor de vergelijking van het minAlcohol.
+    // Gebruikt <= (kleiner of gelijk aan) voor de vergelijking van het minAlcohol.
     public static List<string> GetAllBeersByCountryAndMinAlcohol(string? country = null, decimal? minAlcohol = null)
     {
-        throw new NotImplementedException(); 
+        throw new NotImplementedException();
     }
     
     // 2.4 Question
