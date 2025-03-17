@@ -47,6 +47,138 @@
       <None Update="SQL\InsertReview.sql">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+      <None Update="Snapshots\Assignments3Test.GetAllBeersIncludeBreweryTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.BeerMetMeesteAlcoholTest.received.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.BeerMetMeesteAlcoholTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GeefBrewerByBrouwCodeTest.received.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GeefBrewerByBrouwCodeTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetAllBeersByBreweryIdTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetAllBeersOrderByAlcoholTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetAllBeersSortedByNameForCountryTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetAllBeersTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetAllBrewersTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetBeerWithMostAlcoholTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetBreweryByBrewerIdTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetCafeBeersByListTest.received.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetCafeBeersByListTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetCafeBeersTest.received.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetCafeBeersTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.NumberOfBrewersByCountryTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtAantalBrewerijenPerLandTest.received.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtAantalBrewerijenPerLandTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtAlleBeerenTest.received.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtAlleBeerenTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtAlleBeerenVoorBrewerTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtAlleBeerenVoorLandTest.received.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtAlleBeerenVoorLandTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtAlleBrewersTest.received.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtAlleBrewersTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtBeerenPerCafeLijstTest.received.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtBeerenPerCafeLijstTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtBeerenPerCafeTest.received.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments2Tests.GetAllBeerNamesWithBreweryAndBrewmasterTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments2Tests.GetAllBeersByCountryTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments2Tests.GetBeersByCountryAndTypeTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBeersIncludeBreweryAndIncludeBeersInBreweryTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBeersIncludeBreweryTest.received.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBeersIncludeBreweryTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBrewersIncludeBeersTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBrewersIncludeBeersThenIncludeCafesTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBrewersIncludeBrewmasterTest.received.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBrewersIncludeBrewmasterTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBrewersIncludingBeersNPlus1Test.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBrewmastersWithBreweryTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBrouwmeestersIncludesAddressTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetBeerAndBrewersByViewTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.OverzichtBierenPerKroegLijstTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

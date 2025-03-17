@@ -66,7 +66,24 @@ public class Assignments3
     // Kijk in voorbeelden hoe je dit kan doen. Deze staan in de directory ExampleFromSheets/Relationships.cs.
     public static List<Beer> GetAllBeersIncludeBrewery()
     {
-        throw new NotImplementedException();
+        string sql = """
+                     SELECT b.*, '' AS BrewerSplit, br.*
+                     FROM Beer b 
+                         JOIN Brewer br ON b.BrewerId = br.BrewerId
+                     ORDER BY b.Name
+                     """;
+
+        var connection = DbHelper.GetConnection();
+
+        var brewerDict = new Dictionary<int, Brewer>();
+        var r = connection.Query<Beer, Brewer, Beer>(sql, (beer, brewer) =>
+        {
+            brewerDict.TryAdd(brewer.BrewerId, brewer);
+            brewer = brewerDict[brewer.BrewerId];
+            beer.Brewer = brewer;
+            return beer;
+        }, splitOn: "BrewerSplit").Distinct().ToList();
+        return r;
     }
     
     // 3.5 Question
