@@ -60,30 +60,13 @@ public class Assignments3
     // 3.4 Question
     // 1 op veel relatie (one-to-many relationship)
     // Geef een overzicht van alle bieren. Zorg ervoor dat de property Brewer gevuld is.
-    // Sorteer op biernaam.
+    // Sorteer op biernaam en beerId!!!!
     // Zorg ervoor dat bieren van dezelfde brouwerij naar dezelfde instantie van Brouwer verwijzen.
     // Dit kan je doen door een Dictionary<int, Brouwer> te gebruiken.
     // Kijk in voorbeelden hoe je dit kan doen. Deze staan in de directory ExampleFromSheets/Relationships.cs.
     public static List<Beer> GetAllBeersIncludeBrewery()
     {
-        string sql = """
-                     SELECT b.*, '' AS BrewerSplit, br.*
-                     FROM Beer b 
-                         JOIN Brewer br ON b.BrewerId = br.BrewerId
-                     ORDER BY b.Name
-                     """;
-
-        var connection = DbHelper.GetConnection();
-
-        var brewerDict = new Dictionary<int, Brewer>();
-        var r = connection.Query<Beer, Brewer, Beer>(sql, (beer, brewer) =>
-        {
-            brewerDict.TryAdd(brewer.BrewerId, brewer);
-            brewer = brewerDict[brewer.BrewerId];
-            beer.Brewer = brewer;
-            return beer;
-        }, splitOn: "BrewerSplit").Distinct().ToList();
-        return r;
+        throw new NotImplementedException();
     }
     
     // 3.5 Question
