@@ -47,8 +47,11 @@ public class Assignments3
     // Dapper snapt niet dat het om een 1 - 0..1 relatie gaat.
     // De Query methode ziet er als volgt uit (let op het vraagteken optioneel):
     // Query<Brewer, Brewmaster?, Brewer>(sql, map: ...)
-    // Wat je kan doen is in de map functie een controle toevoegen:
+    // Wat je kan doen is in de map functie een controle toevoegen, je zou dit verwachten:
     // if (brewmaster is not null) { brewer.Brewmaster = brewmaster; }
+    // !!echter dit werkt niet!!!!
+    // Plaats eens een breakpoint en kijk wat er in de brewmaster variabele staat,
+    // hoe moet dan je if worden?
     public static List<Brewer> GetAllBrewersIncludeBrewmaster()
     {
         throw new NotImplementedException();
