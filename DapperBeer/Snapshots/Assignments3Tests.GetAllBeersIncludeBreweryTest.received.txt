@@ -5,7 +5,6 @@
     Type: SPECIAL,
     Style: CHERRY(CILIEGE),
     Alcohol: 6.5,
-    BrewerId: 1201,
     Brewer: {
       BrewerId: 1201,
       Name: SCHELDEBROUWERIJ,
@@ -18,7 +17,6 @@
     Type: ALE, ENGLIS,
     Style: STRONG BITTER/PALE,
     Alcohol: 6.0,
-    BrewerId: 956,
     Brewer: {
       BrewerId: 956,
       Name: HAMPSHIRE,
@@ -31,7 +29,6 @@
     Type: LAGER,PALE,
     Style: PILSEN,
     Alcohol: 4.6,
-    BrewerId: 962,
     Brewer: {
       BrewerId: 962,
       Name: HARBOE,
