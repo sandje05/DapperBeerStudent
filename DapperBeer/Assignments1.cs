@@ -52,7 +52,7 @@ public class Assignments1 : TestHelper
     {
         string sql = 
             @"  SELECT BeerId, Name, Type, Style, Alcohol, BrewerId 
-                FROM Beer 
+                FROM Beer
                 ORDER BY Alcohol DESC";
 
         using var connection = DbHelper.GetConnection();

@@ -15,6 +15,7 @@
       <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
       <PackageReference Include="MySqlConnector" Version="2.4.0" />
       <PackageReference Include="NUnit" Version="4.3.2" />
+      <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" />
       <PackageReference Include="SqlKata" Version="2.4.0" />
       <PackageReference Include="Verify.NUnit" Version="28.10.1" />
     </ItemGroup>
@@ -46,6 +47,102 @@
       </None>
       <None Update="SQL\InsertReview.sql">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Test.GetAllBeersIncludeBreweryTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.BeerMetMeesteAlcoholTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GeefBrewerByBrouwCodeTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetAllBeersByBreweryIdTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetAllBeersOrderByAlcoholTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetAllBeersSortedByNameForCountryTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetAllBeersTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetAllBrewersTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetBeerWithMostAlcoholTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetBreweryByBrewerIdTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetCafeBeersByListTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.GetCafeBeersTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.NumberOfBrewersByCountryTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtAantalBrewerijenPerLandTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtAlleBeerenTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtAlleBeerenVoorBrewerTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtAlleBeerenVoorLandTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtAlleBrewersTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments1Tests.OverzichtBeerenPerCafeLijstTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments2Tests.GetAllBeerNamesWithBreweryAndBrewmasterTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments2Tests.GetAllBeersByCountryTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments2Tests.GetBeersByCountryAndTypeTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBeersIncludeBreweryAndIncludeBeersInBreweryTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBeersIncludeBreweryTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBrewersIncludeBeersTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBrewersIncludeBeersThenIncludeCafesTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBrewersIncludeBrewmasterTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBrewersIncludingBeersNPlus1Test.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBrewmastersWithBreweryTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetAllBrouwmeestersIncludesAddressTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.GetBeerAndBrewersByViewTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Snapshots\Assignments3Tests.OverzichtBierenPerKroegLijstTest.verified.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>
 

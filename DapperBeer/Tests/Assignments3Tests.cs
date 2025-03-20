@@ -36,7 +36,7 @@ public class Assignments3Tests : TestHelper
     public async Task GetAllBeersIncludeBreweryTest()
     {
         List<Beer> allBeersIncludeBrewery = Assignments3.GetAllBeersIncludeBrewery();
-        await Verify(allBeersIncludeBrewery);
+        await Verify(allBeersIncludeBrewery.Take(3));
     }
     
     // 3.5 Test

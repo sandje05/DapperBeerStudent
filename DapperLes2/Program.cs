@@ -5,6 +5,7 @@ using DapperBeer;
 using DapperBeer.Model;
 
 #region SQLInjectionPlusSolution
+
 SqlInjectionExample();
 SqlInjectionSolution();
 
