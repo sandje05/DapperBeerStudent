@@ -216,10 +216,10 @@ public class Assignments1 : TestHelper
     public static int InsertReviewReturnsReviewId(int beerId, decimal score)
     {
         var sql = @"INSERT INTO review (BeerId, Score) VALUES (@BeerId, @Score)";
-        var sql2 = @"SELECT ReviewId FROM review WHERE BeerId = @BeerId AND Score = @Score";
+        var sql2 = @"SELECT ReviewId FROM review WHERE BeerId = @BeerId";
         using var connection = DbHelper.GetConnection();
         connection.Execute(sql, new { BeerId = beerId, Score = score });
-        int ans = connection.QuerySingle<int>(sql2, new { BeerId = beerId, Score = score });
+        int ans = connection.QuerySingle<int>(sql2, new { BeerId = beerId,  });
         return ans;
         
         throw new NotImplementedException();
