@@ -68,6 +68,16 @@ public class Assignments2
     // Gebruikt <= (kleiner of gelijk aan) voor de vergelijking van het minAlcohol.
     public static List<string> GetAllBeersByCountryAndMinAlcohol(string? country = null, decimal? minAlcohol = null)
     {
+        var sql = @"SELECT beer.name 
+                    FROM beer 
+                    JOIN brewer on beer.BrewerId = brewer.BrewerId 
+                    WHERE (@Country IS NULL OR brewer.Country = @Country)
+                    AND (@MINALCOHOL IS NULL OR beer.Alcohol >= @MINALCOHOL)";
+        using var conn = DbHelper.GetConnection();
+        List<string> ans = conn.Query<string>(sql, new { Country = country, MINALCOHOL = minAlcohol }).ToList();
+        Console.WriteLine(ans);
+        return ans;
+
         throw new NotImplementedException();
     }
     
@@ -106,18 +116,48 @@ public class Assignments2
         string? country = null, decimal? minAlcohol = null, string orderBy = "beer.Name")
     {
         using IDbConnection connection = DbHelper.GetConnection();
-        string sql = $"""
-                      SELECT beer.Name
-                      FROM Beer beer 
-                           JOIN Brewer brewer ON beer.BrewerId = brewer.BrewerId 
-                      /**where**/
-                      /**orderby**/
-                      """;
         
-        SqlBuilder builder = new SqlBuilder();
+        var allowedOrderByColumns = new HashSet<string>
+        {
+            "beer.Name",
+            "Alcohol",
+            "beer.BeerId",
+            "brewer.Name",
+            "brewer.Country"
+        };
         
-        throw new NotImplementedException();
+        if (!allowedOrderByColumns.Contains(orderBy))
+        {
+            orderBy = "beer.Name";
+        }
+
+        string sql = """
+                     SELECT beer.Name
+                     FROM Beer beer 
+                          JOIN Brewer brewer ON beer.BrewerId = brewer.BrewerId 
+                     /**where**/
+                     /**orderby**/
+                     """;
+
+        var builder = new SqlBuilder();
+        var template = builder.AddTemplate(sql);
+
+        if (country != null)
+        {
+            builder.Where("brewer.Country = @Country", new { Country = country });
+        }
+
+        if (minAlcohol != null)
+        {
+            builder.Where("beer.Alcohol >= @MinAlcohol", new { MinAlcohol = minAlcohol });
+        }
+
+        builder.OrderBy(orderBy);
+
+        var beers = connection.Query<string>(template.RawSql, template.Parameters);
+        return beers.ToList();
     }
+
 
     // 2.5 Question
     // Maak een view die de naam van het bier teruggeeft en de naam van de brouwerij
@@ -128,7 +168,11 @@ public class Assignments2
     // Gebruik de klasse BrewerBeerBrewmaster om de resultaten in op te slaan. (directory DTO).
     public static List<BrewerBeerBrewmaster> GetAllBeerNamesWithBreweryAndBrewmaster()
     {
-        throw new NotImplementedException();
+         var sql =
+            "SELECT beer.name as BeerName, brewer.Name as BrewerName, brewmaster.Name as BrewmasterName from beer join brewer on beer.BrewerId = brewer.BrewerId left join brewmaster on brewer.BrewerId = brewmaster.BrewerId where brewmaster.Name is not null order by beer.name";
+        using var conn = DbHelper.GetConnection();
+        return conn.Query<BrewerBeerBrewmaster>(sql)
+            .ToList();
     }
     
     // 2.6 Question
@@ -141,31 +185,40 @@ public class Assignments2
     // LIMIT @PageSize OFFSET @Offset  
     // Sorteer op OrderBy
     // Zie de klasse BeerFilter.
-    public class BeerFilter
-    {
+    public class BeerFilter {
         public string? Country { get; set; }
         public string? Type { get; set; }
-        public int PageSize { get; set; } = 10;    //default value start at 0
-        public int PageIndex { get; set; } = 0;    //default value start at 0
-        
-        public int Offset => PageSize * (PageIndex+1);
-        
+        public int PageSize { get; set; } = 10; //default value start at 0
+        public int PageIndex { get; set; } = 0; //default value start at 0
+
+        public int Offset => PageSize * (PageIndex + 1);
+
         public string OrderBy { get; set; } = "beer.Name";
     }
-    public static List<Beer> GetBeersByCountryAndType(BeerFilter filter)
-    {
-        using IDbConnection connection = DbHelper.GetConnection();
-        string sql = $"""
-                      SELECT beer.BeerId, beer.Name, beer.Type, beer.Style, beer.Alcohol, beer.BrewerId
-                      FROM Beer beer 
-                           JOIN Brewer brewer ON beer.BrewerId = brewer.BrewerId
-                      /**where**/
-                      /**orderby**/
-                      LIMIT @PageSize OFFSET @Offset
-                      """;
-        
+
+    public static List<Beer> GetBeersByCountryAndType(BeerFilter filter) {
+        using IDbConnection conn = DbHelper.GetConnection();
+        const string sql = $"""
+                            SELECT beer.BeerId as BeerId, beer.Name as Name, beer.Type as Type, beer.Style as Style, beer.Alcohol as Alcohol, beer.BrewerId as BrewerId
+                            FROM Beer beer 
+                                 JOIN Brewer brewer ON beer.BrewerId = brewer.BrewerId
+                            /**where**/
+                            /**orderby**/
+                            LIMIT @PageSize OFFSET @Offset  
+                            """;
         SqlBuilder builder = new SqlBuilder();
 
-        throw new NotImplementedException();
+        builder.OrderBy(filter.OrderBy);
+        if (filter.Type is not null) {
+            builder.Where("Type=@Type");
+        }
+
+        if (filter.Country is not null) {
+            builder.Where("Country=@Country");
+        }
+
+        var template = builder.AddTemplate(sql, filter);
+
+        return conn.Query<Beer>(template.RawSql, template.Parameters).ToList();
     }
 }

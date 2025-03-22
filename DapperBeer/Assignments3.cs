@@ -25,7 +25,10 @@ public class Assignments3
     // Kijk in voorbeelden hoe je dit kan doen. Deze staan in de directory ExampleFromSheets/Relationships.cs.
     public static List<Brewmaster> GetAllBrouwmeestersIncludesAddress()
     {
-        throw new NotImplementedException();
+        using var connection = DbHelper.GetConnection();
+        string sql = @"SELECT * FROM Brewmaster b JOIN Address a ON b.AddressId = a.AddressId ORDER BY b.Name";
+        var result = connection.Query<Brewmaster, Address, Brewmaster>(sql, (b, a) => { b.Address = a; return b; }, splitOn: "AddressId").ToList();
+        return result;
     }
 
     // 3.2 Question
@@ -34,7 +37,10 @@ public class Assignments3
     // Sorteer op naam.
     public static List<Brewmaster> GetAllBrewmastersWithBrewery()
     {
-        throw new NotImplementedException();
+        using var connection = DbHelper.GetConnection();
+        string sql = @"SELECT * FROM Brewmaster b JOIN Brewer br ON b.BrewerId = br.BrewerId ORDER BY b.Name";
+        var result = connection.Query<Brewmaster, Brewer, Brewmaster>(sql, (b, br) => { b.Brewer = br; return b; }, splitOn: "BrewerId").ToList();
+        return result;
     }
 
     // 3.3 Question
@@ -54,7 +60,14 @@ public class Assignments3
     // hoe moet dan je if worden?
     public static List<Brewer> GetAllBrewersIncludeBrewmaster()
     {
-        throw new NotImplementedException();
+        using var connection = DbHelper.GetConnection();
+        string sql = @"SELECT * FROM Brewer br LEFT JOIN Brewmaster bm ON br.BrewerId = bm.BrewerId ORDER BY br.Name";
+        var result = connection.Query<Brewer, Brewmaster, Brewer>(sql, (br, bm) => {
+            if (bm != null && bm.BrewmasterId != 0)
+                br.Brewmaster = bm;
+            return br;
+        }, splitOn: "BrewmasterId").ToList();
+        return result;
     }
     
     // 3.4 Question
@@ -66,7 +79,17 @@ public class Assignments3
     // Kijk in voorbeelden hoe je dit kan doen. Deze staan in de directory ExampleFromSheets/Relationships.cs.
     public static List<Beer> GetAllBeersIncludeBrewery()
     {
-        throw new NotImplementedException();
+        using var connection = DbHelper.GetConnection();
+        string sql = @"SELECT * FROM Beer b JOIN Brewer br ON b.BrewerId = br.BrewerId ORDER BY b.Name, b.BeerId";
+        var brewerDict = new Dictionary<int, Brewer>();
+        var result = connection.Query<Beer, Brewer, Beer>(sql, (beer, brewer) => {
+            if (!brewerDict.TryGetValue(brewer.BrewerId, out var existingBrewer))
+            {
+                existingBrewer = brewer;
+                brewerDict[brewer.BrewerId] = brewer;
+            }
+            beer.Brewer = existingBrewer;
+        return result;
     }
     
     // 3.5 Question
@@ -79,7 +102,14 @@ public class Assignments3
     // Als N groot is (veel brouwerijen) dan kan dit een performance probleem zijn of worden. Probeer dit te voorkomen!
     public static List<Brewer> GetAllBrewersIncludingBeersNPlus1()
     {
-        throw new NotImplementedException();
+        using var connection = DbHelper.GetConnection();
+        var brewers = connection.Query<Brewer>("SELECT * FROM Brewer ORDER BY Name").ToList();
+        foreach (var brewer in brewers)
+        {
+            var beers = connection.Query<Beer>("SELECT * FROM Beer WHERE BrewerId = @Id ORDER BY Name", new { Id = brewer.BrewerId }).ToList();
+            brewer.Beers = beers;
+        }
+        return brewers;
     }
     
     // 3.6 Question
@@ -97,7 +127,20 @@ public class Assignments3
     
     public static List<Brewer> GetAllBrewersIncludeBeers()
     {
-        throw new NotImplementedException();
+        using var connection = DbHelper.GetConnection();
+        string sql = @"SELECT * FROM Brewer br JOIN Beer b ON br.BrewerId = b.BrewerId ORDER BY br.Name, b.Name";
+        var brewerDict = new Dictionary<int, Brewer>();
+        var result = connection.Query<Brewer, Beer, Brewer>(sql, (br, b) => {
+            if (!brewerDict.TryGetValue(br.BrewerId, out var existingBrewer))
+            {
+                existingBrewer = br;
+                existingBrewer.Beers = new List<Beer>();
+                brewerDict[br.BrewerId] = existingBrewer;
+            }
+            existingBrewer.Beers.Add(b);
+            return existingBrewer;
+        }, splitOn: "BeerId").Distinct().ToList();
+        return result;
     }
     
     // 3.7 Question
@@ -107,7 +150,22 @@ public class Assignments3
     // Let op dat er geen dubbelingen komen in de Beers property van Beer!
     public static List<Beer> GetAllBeersIncludeBreweryAndIncludeBeersInBrewery()
     {
-        throw new NotImplementedException();
+        using var connection = DbHelper.GetConnection();
+        string sql = @"SELECT * FROM Beer b JOIN Brewer br ON b.BrewerId = br.BrewerId ORDER BY br.Name, b.Name";
+        var brewerDict = new Dictionary<int, Brewer>();
+        var result = connection.Query<Beer, Brewer, Beer>(sql, (b, br) => {
+            if (!brewerDict.TryGetValue(br.BrewerId, out var existingBrewer))
+            {
+                existingBrewer = br;
+                existingBrewer.Beers = new List<Beer>();
+                brewerDict[br.BrewerId] = existingBrewer;
+            }
+            if (!existingBrewer.Beers.Any(x => x.BeerId == b.BeerId))
+                existingBrewer.Beers.Add(b);
+            b.Brewer = existingBrewer;
+            return b;
+        }, splitOn: "BrewerId").ToList();
+        return result;
     }
     
     // 3.8 Question
@@ -126,7 +184,21 @@ public class Assignments3
     // Als je dit namelijk verkeerd doet, kan dit grote gevolgen hebben voor je resultaat (je krijgt dan misschien een verkeerde aantal records).
     public static List<Cafe> OverzichtBierenPerKroegLijstMultiMapper()
     {
-        throw new NotImplementedException();
+        using var connection = DbHelper.GetConnection();
+        string sql = @"SELECT * FROM Cafe c LEFT JOIN Sells s ON c.CafeId = s.CafeId LEFT JOIN Beer b ON s.BeerId = b.BeerId ORDER BY c.Name, b.Name";
+        var cafeDict = new Dictionary<int, Cafe>();
+        var result = connection.Query<Cafe, Beer, Cafe>(sql, (c, b) => {
+            if (!cafeDict.TryGetValue(c.CafeId, out var existingCafe))
+            {
+                existingCafe = c;
+                existingCafe.Beers = new List<Beer>();
+                cafeDict[c.CafeId] = existingCafe;
+            }
+            if (b != null && b.BeerId != 0)
+                existingCafe.Beers.Add(b);
+            return existingCafe;
+        }, splitOn: "BeerId").Distinct().ToList();
+        return result;
     }
 
     // 3.9 Question
@@ -138,7 +210,33 @@ public class Assignments3
     // Je zult twee dictionaries moeten gebruiken. Een voor de brouwerijen en een voor de bieren.
     public static List<Brewer> GetAllBrewersIncludeBeersThenIncludeCafes()
     {
-        throw new NotImplementedException();
+        using var connection = DbHelper.GetConnection();
+        string sql = @"SELECT * FROM Brewer br JOIN Beer b ON br.BrewerId = b.BrewerId LEFT JOIN Sells s ON b.BeerId = s.BeerId LEFT JOIN Cafe c ON s.CafeId = c.CafeId ORDER BY br.Name, b.Name, c.Name";
+        var brewerDict = new Dictionary<int, Brewer>();
+        var beerDict = new Dictionary<int, Beer>();
+        var result = connection.Query<Brewer, Beer, Cafe, Brewer>(sql, (br, b, c) => {
+            if (!brewerDict.TryGetValue(br.BrewerId, out var existingBrewer))
+            {
+                existingBrewer = br;
+                existingBrewer.Beers = new List<Beer>();
+                brewerDict[br.BrewerId] = existingBrewer;
+            }
+            if (!beerDict.TryGetValue(b.BeerId, out var existingBeer))
+            {
+                existingBeer = b;
+                existingBeer.Cafes = new List<Cafe>();
+                beerDict[b.BeerId] = existingBeer;
+                existingBrewer.Beers.Add(existingBeer);
+            }
+            if (c != null && c.CafeId != 0)
+            {
+                if (existingBeer.Cafes == null)
+                    existingBeer.Cafes = new List<Cafe>();
+                existingBeer.Cafes.Add(c);
+            }
+            return existingBrewer;
+        }, splitOn: "BeerId,CafeId").Distinct().ToList();
+        return result;
     }
     
     // 3.10 Question - Er is geen test voor deze vraag
@@ -149,6 +247,9 @@ public class Assignments3
     // (SELECT BeerId, BeerName as Name, Type, ...). Zie BeerName als voorbeeld hiervan.
     public static List<Beer> GetBeerAndBrewersByView()
     {
-        throw new NotImplementedException();
+        using var connection = DbHelper.GetConnection();
+        string sql = @"SELECT BeerId, BeerName as Name, Type, Alcohol, BrewerId, BrewerName FROM BeerAndBrewer ORDER BY BrewerName, BeerName";
+        var result = connection.Query<Beer>(sql).ToList();
+        return result;
     }
 }
