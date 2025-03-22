@@ -29,18 +29,12 @@ public class Assignments2
     // !!!DOE DIT NOOIT MEER SVP!!!!
     public static List<string> GetBeersByCountryWithSqlInjection(string country)
     {
-        var sqlTemplate = @"
-    SELECT b.Name 
-    FROM beer b 
-        JOIN sells s ON cafe.CafeID = s.CafeId AND b.BeerId = s.BeerId 
-        JOIN addrres a ON cafe.Address = a.Street
-    WHERE address.Country = '{Country}'";
-    
-        // Replace {Country} with the injected value (unsafe on purpose for testing)
-        var sql = sqlTemplate.Replace("{Country}", country);
-    
-        using var connection = DbHelper.GetConnection();
-        var ans = connection.Query<string>(sql).ToList();
+        string sql =
+            "select beer.name from beer join brewer on beer.BrewerId = brewer.BrewerId where brewer.Country = '" +
+            country + "'";
+        
+        using var conn = DbHelper.GetConnection();
+        List<string> ans = conn.Query<string>(sql).ToList();
         return ans;
     }
 
@@ -55,6 +49,15 @@ public class Assignments2
     // Dit betekent dus dat country null kan zijn.
     public static List<string> GetAllBeersByCountry(string? country)
     {
+        var sql = @"SELECT beer.name 
+                    FROM beer 
+                    JOIN brewer on beer.BrewerId = brewer.BrewerId 
+                    WHERE (@Country IS NULL OR brewer.Country = @Country)";
+        using var conn = DbHelper.GetConnection();
+        List<string> ans = conn.Query<string>(sql, new { Country = country }).ToList();
+        Console.WriteLine(ans);
+        return ans;
+       
         throw new NotImplementedException();
     }
     

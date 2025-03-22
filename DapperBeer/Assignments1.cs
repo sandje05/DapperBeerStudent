@@ -215,14 +215,12 @@ public class Assignments1 : TestHelper
     // Deze test werkt alleen decimal GetBeerRating(int beerId) methode correct is (twee vragen hiervoor).
     public static int InsertReviewReturnsReviewId(int beerId, decimal score)
     {
-        var sql = @"INSERT INTO review (BeerId, Score) VALUES (@BeerId, @Score)";
-        var sql2 = @"SELECT ReviewId FROM review WHERE BeerId = @BeerId";
+        var sql = @"INSERT INTO review (BeerId, Score) VALUES (@BeerId, @Score);
+                SELECT LAST_INSERT_ID();";
+    
         using var connection = DbHelper.GetConnection();
-        connection.Execute(sql, new { BeerId = beerId, Score = score });
-        int ans = connection.QuerySingle<int>(sql2, new { BeerId = beerId,  });
-        return ans;
-        
-        throw new NotImplementedException();
+        int reviewId = connection.QuerySingle<int>(sql, new { BeerId = beerId, Score = score });
+        return reviewId;
     }
     
     // twee methoden verwijderd
