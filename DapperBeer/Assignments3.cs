@@ -89,6 +89,8 @@ public class Assignments3
                 brewerDict[brewer.BrewerId] = brewer;
             }
             beer.Brewer = existingBrewer;
+            return beer;
+        }, splitOn: "BrewerId").ToList();
         return result;
     }
     
