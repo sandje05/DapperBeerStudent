@@ -102,16 +102,11 @@ public class Assignments1 : TestHelper
     
     // 1.5 Question
     // Geef een overzicht van het aantal brouwerijen per land gesorteerd op aantal brouwerijen (van hoog naar laag).
-    
     // Gebruik hiervoor een aparte class NumberOfBrewersByCountry
-    
     // Voeg hiervoor properties toe aan de class NumberOfBrewersByCountry, namelijk Country en NumberOfBreweries.
-    
     // Gebruik de volgende SELECT-clause zodat de kolomnamen in de resultaten overeenkomen met de properties van de class NumberOfBrewersByCountry.:
     //   SELECT Country, COUNT(1) AS NumberOfBreweries
-    
     // In de directory DTO (Data Transfer Object) staan de classes die worden gebruikt als resultaat
-    
     // voor Queries die net overeenkomen met de database tabellen.
     public static List<NumberOfBrewersByCountry> NumberOfBrewersByCountry()
     {
@@ -134,9 +129,9 @@ public class Assignments1 : TestHelper
     // Je kan in MySQL de LIMIT 1 gebruiken om 1 record terug te krijgen.
     public static Beer GetBeerWithMostAlcohol()
     {
-        var sql = @"SELECT * From Beer order by Alcohol DESC";
+        var sql = @"SELECT * From Beer order by Alcohol DESC LIMIT 1";
         using var connection = DbHelper.GetConnection();
-        var beer = connection.QueryFirst<Beer>(sql);
+        var beer = connection.QuerySingle<Beer>(sql);
         return beer;
         
         throw new NotImplementedException();
