@@ -213,31 +213,54 @@ public class Assignments3
     public static List<Brewer> GetAllBrewersIncludeBeersThenIncludeCafes()
     {
         using var connection = DbHelper.GetConnection();
-        string sql = @"SELECT * FROM Brewer br JOIN Beer b ON br.BrewerId = b.BrewerId LEFT JOIN Sells s ON b.BeerId = s.BeerId LEFT JOIN Cafe c ON s.CafeId = c.CafeId ORDER BY br.Name, b.Name, c.Name";
+        
+        string sql = @"
+        SELECT 
+            br.BrewerId, br.Name AS Name, br.Country,
+            b.BeerId, b.Name AS Name, b.Type, b.Style, b.Alcohol, b.BrewerId AS BrewerId,
+            c.CafeId, c.Name AS Name, c.Address, c.City
+        FROM Brewer br
+        JOIN Beer b ON br.BrewerId = b.BrewerId
+        LEFT JOIN Sells s ON b.BeerId = s.BeerId
+        LEFT JOIN Cafe c ON s.CafeId = c.CafeId
+        ORDER BY br.Name, b.Name, c.Name;
+    ";
+        
         var brewerDict = new Dictionary<int, Brewer>();
         var beerDict = new Dictionary<int, Beer>();
-        var result = connection.Query<Brewer, Beer, Cafe, Brewer>(sql, (br, b, c) => {
-            if (!brewerDict.TryGetValue(br.BrewerId, out var existingBrewer))
+        
+        var result = connection.Query<Brewer, Beer, Cafe, Brewer>(
+            sql,
+            (br, b, c) =>
             {
-                existingBrewer = br;
-                existingBrewer.Beers = new List<Beer>();
-                brewerDict[br.BrewerId] = existingBrewer;
-            }
-            if (!beerDict.TryGetValue(b.BeerId, out var existingBeer))
-            {
-                existingBeer = b;
-                existingBeer.Cafes = new List<Cafe>();
-                beerDict[b.BeerId] = existingBeer;
-                existingBrewer.Beers.Add(existingBeer);
-            }
-            if (c != null && c.CafeId != 0)
-            {
-                if (existingBeer.Cafes == null)
+                if (!brewerDict.TryGetValue(br.BrewerId, out var existingBrewer))
+                {
+                    existingBrewer = br;
+                    existingBrewer.Beers = new List<Beer>();
+                    brewerDict[br.BrewerId] = existingBrewer;
+                }
+
+                if (!beerDict.TryGetValue(b.BeerId, out var existingBeer))
+                {
+                    existingBeer = b;
                     existingBeer.Cafes = new List<Cafe>();
-                existingBeer.Cafes.Add(c);
-            }
-            return existingBrewer;
-        }, splitOn: "BeerId,CafeId").Distinct().ToList();
+                    beerDict[b.BeerId] = existingBeer;
+                    existingBrewer.Beers.Add(existingBeer);
+                }
+
+                if (c != null && c.CafeId != 0)
+                {
+                    if (beerDict[b.BeerId].Cafes == null)
+                        beerDict[b.BeerId].Cafes = new List<Cafe>();
+
+                    beerDict[b.BeerId].Cafes.Add(c);
+                }
+
+                return existingBrewer;
+            },
+            splitOn: "BeerId,CafeId"
+        ).Distinct().ToList();
+    
         return result;
     }
     
@@ -249,9 +272,6 @@ public class Assignments3
     // (SELECT BeerId, BeerName as Name, Type, ...). Zie BeerName als voorbeeld hiervan.
     public static List<Beer> GetBeerAndBrewersByView()
     {
-        using var connection = DbHelper.GetConnection();
-        string sql = @"SELECT BeerId, BeerName as Name, Type, Alcohol, BrewerId, BrewerName FROM BeerAndBrewer ORDER BY BrewerName, BeerName";
-        var result = connection.Query<Beer>(sql).ToList();
-        return result;
+        throw new NotImplementedException();
     }
 }

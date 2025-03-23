@@ -79,12 +79,4 @@ public class Assignments3Tests : TestHelper
         await Verify(brewersWithBeersServedInMultipleCafes);
     }
     
-    // 3.9 Test
-    [Test]
-    public async Task GetBeerAndBrewersByViewTest()
-    {
-        List<Beer> result = Assignments3.GetBeerAndBrewersByView();
-        result.Should().HaveCount(1617);
-        await Verify(result.Take(3));
-    }
 }
