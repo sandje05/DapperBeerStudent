@@ -42,6 +42,23 @@ public class Assignments2Tests : TestHelper
         Assignments2.GetAllBeersByCountryAndMinAlcohol().Should().HaveCount(1617);
     }
     
+    // 2.4 Test
+    [Test]
+    public void GetAllBeersByCountryAndTypeTest()
+    {
+        Assignments2.GetAllBeersByCountryAndMinAlcoholOrderByWithSqlBuilder("BEL", 5.5m).Should().HaveCount(213);
+        Assignments2.GetAllBeersByCountryAndMinAlcoholOrderByWithSqlBuilder(minAlcohol: 5.5m).Should().HaveCount(626);
+        Assignments2.GetAllBeersByCountryAndMinAlcoholOrderByWithSqlBuilder(country: "BEL").Should().HaveCount(296);
+        Assignments2.GetAllBeersByCountryAndMinAlcoholOrderByWithSqlBuilder().Should().HaveCount(1617);
+         
+        IEnumerable<string> orderByName = Assignments2.GetAllBeersByCountryAndMinAlcoholOrderByWithSqlBuilder(minAlcohol: 10, country: "BEL", orderBy: "beer.Name").Take(2);
+        orderByName.Should().BeEquivalentTo(["ADA 10", "BIERE DU BOUCANIER"]);
+        IEnumerable<string> orderByAlcohol = Assignments2.GetAllBeersByCountryAndMinAlcoholOrderByWithSqlBuilder(orderBy: "Alcohol").Take(2);
+        orderByAlcohol.Should().BeEquivalentTo(["GULL", "BERLINER WEISSE" ]);
+        IEnumerable<string> orderByType = Assignments2.GetAllBeersByCountryAndMinAlcoholOrderByWithSqlBuilder(country: "BEL", orderBy: "Type").Take(2);
+        orderByType.Should().BeEquivalentTo(["MAREDSOUS 8", "FLOREFFE" ]);
+    }
+
     // 2.5 Test  
     [Test]
     public async Task GetAllBeerNamesWithBreweryAndBrewmasterTest()
